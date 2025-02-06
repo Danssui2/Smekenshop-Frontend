@@ -1,0 +1,63 @@
+[
+  {
+    "id": "1",
+    "name": "Sambal Pecel Pedas Kemasan 100g",
+    "description": "lorem ipsim dolor sit amet xonsictour an atmos lonasian",
+    "price": 10000,
+    "category": "Makanan"
+    "images": [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10"
+    ],
+    "seller": {
+      "id": "56789",
+      "name": "Toko Gadget XYZ",
+      "rating": 4.8
+    }
+  }
+]
+
+{
+  "id": "12345",
+  "name": "Smartphone XYZ",
+  "description": "Smartphone dengan layar 6.5 inci, kamera 64MP, dan baterai tahan lama.",
+  "price": 2999999,
+  "currency": "IDR",
+  "stock": 120,
+  "category": "Electronics",
+  "brand": "XYZ",
+  "ratings": {
+    "average": 4.5,
+    "reviews_count": 245
+  },
+  "images": [
+    "https://example.com/images/smartphone-xyz-front.jpg",
+    "https://example.com/images/smartphone-xyz-back.jpg"
+  ],
+  "variants": [
+    {
+      "variant_id": "12345-1",
+      "color": "Black",
+      "storage": "128GB",
+      "price": 2999999
+    },
+    {
+      "variant_id": "12345-2",
+      "color": "Blue",
+      "storage": "256GB",
+      "price": 3499999
+    }
+  ],
+  "seller": {
+    "id": "56789",
+    "name": "Toko Gadget XYZ",
+    "rating": 4.8
+  },
+  "shipping": {
+    "free_shipping": true,
+    "estimated_delivery": "3-5 days"
+  },
+  "tags": ["smartphone", "electronics", "high performance"],
+  "created_at": "2025-01-01T12:00:00Z",
+  "updated_at": "2025-01-10T15:30:00Z"
+}
