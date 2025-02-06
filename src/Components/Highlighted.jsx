@@ -20,10 +20,10 @@ const Highlighted = () => {
     
         <div class="grid gap-x-4 gap-y-8 sm:grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
           
-          <Card img={data[0].img} name={data[0].name} author={data[0].owner} price={data[0].price}/>
-          <Card img="" name="Anjing Piara" author="Gwa Sendiri Anying" price="5Juta"/>
-          <Card img="" name="Anjing Piara" author="Gwa Sendiri Anying" price="5Juta"/>
-          <Card img="" name="Anjing Piara" author="Gwa Sendiri Anying" price="5Juta"/>
+          <Card img={data[0].images[0]} name={data[0].name} author={data[0].owner} price={data[0].price}/>
+          <Card img={data[0].images[0]} name={data[0].name} author={data[0].owner} price={data[0].price}/>
+          <Card img={data[0].images[0]} name={data[0].name} author={data[0].owner} price={data[0].price}/>
+          <Card img={data[0].images[0]} name={data[0].name} author={data[0].owner} price={data[0].price}/>
     
         </div>
       </div>

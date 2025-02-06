@@ -12,7 +12,7 @@ const HelpForm = () => {
     
           <div class="flex flex-col items-center lg:items-end">
             <form class="mb-3 flex w-full max-w-md gap-2">
-              <input placeholder="Pesan" class="bg-gray-white w-full flex-1 rounded border border-gray-300 px-3 py-2 text-gray-800 placeholder-gray-400 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+              <input placeholder="Pesan" class="bg-gray-white w-full bg-slate-50 flex-1 rounded border border-gray-300 px-3 py-2 text-gray-800 placeholder-gray-400 outline-none ring-indigo-300 transition duration-100 focus:ring" />
     
               <button class="inline-block rounded bg-indigo-500 px-8 py-2 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">Kirim</button>
             </form>
