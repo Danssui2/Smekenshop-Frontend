@@ -1,5 +1,3 @@
-import logoStm from '../assets/logostm.png'
-import { BsWhatsapp } from "react-icons/bs"
 
 import Navbar from "../Components/Navbar.jsx"
 import Hero from "../Components/Hero.jsx"
