@@ -76,7 +76,7 @@ const Footer = () => {
           </div>
         </div>
     
-        <div class="border-t py-8 text-center text-sm text-gray-400">© 2025 Smekenshop by Ardans. All rights reserved.</div>
+        <div class="border-t py-8 text-center text-sm text-gray-400">© 2025 Smekenshop by Team AAR. All rights reserved.</div>
       </footer>
     </div>
   )

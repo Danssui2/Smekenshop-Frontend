@@ -11,7 +11,7 @@ function Product({ img, name, desc, category, seller, price }) {
           <div className="order-last flex gap-4 lg:order-none lg:flex-col">
             <div className="overflow-hidden rounded-lg bg-gray-100">
               <img
-                src="https://images.unsplash.com/flagged/photo-1571366992791-2ad2078656cb?auto=format&q=75&fit=crop&w=250"
+                src={img[0]}
                 loading="lazy"
                 alt="Photo by Himanshu Dewangan"
                 className="h-full w-full object-cover object-center"
@@ -20,7 +20,7 @@ function Product({ img, name, desc, category, seller, price }) {
 
             <div className="overflow-hidden rounded-lg bg-gray-100">
               <img
-                src="https://images.unsplash.com/flagged/photo-1571366992968-15b65708ee76?auto=format&q=75&fit=crop&w=250"
+                src={img[0]}
                 loading="lazy"
                 alt="Photo by Himanshu Dewangan"
                 className="h-full w-full object-cover object-center"
@@ -29,7 +29,7 @@ function Product({ img, name, desc, category, seller, price }) {
 
             <div className="overflow-hidden rounded-lg bg-gray-100">
               <img
-                src="https://images.unsplash.com/flagged/photo-1571366992999-47669b775ef6?auto=format&q=75&fit=crop&w=250"
+                src={img[0]}
                 loading="lazy"
                 alt="Photo by Himanshu Dewangan"
                 className="h-full w-full object-cover object-center"
@@ -39,7 +39,7 @@ function Product({ img, name, desc, category, seller, price }) {
 
           <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
             <img
-              src="https://images.unsplash.com/flagged/photo-1571366992942-be878c7b10c0?auto=format&q=75&fit=crop&w=600"
+              src={img[0]}
               loading="lazy"
               alt="Photo by Himanshu Dewangan"
               className="h-full w-full object-cover object-center"
@@ -82,21 +82,21 @@ function Product({ img, name, desc, category, seller, price }) {
           </div>
 
           <div className="flex gap-2">
-            <div className="mb-6 flex items-center md:mb-10">
+            <div className="md:mb-6 mb-3 flex items-center">
               <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
                 <span className="text-sm">169</span>
                 <HiOutlineEye />
               </div>
             </div>
 
-            <div className="mb-6 flex items-center gap-3 md:mb-10">
+            <div className="md:mb-6 mb-3 flex items-center gap-3">
               <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
                 <span className="text-sm">169</span>
                 <TbBrandWechat />
               </div>
             </div>
 
-            <div className="mb-6 flex items-center gap-3 md:mb-10">
+            <div className="md:mb-6 mb-3 flex items-center gap-3">
               <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
                 <span className="text-sm">169</span>
                 <FiHeart />
@@ -104,73 +104,24 @@ function Product({ img, name, desc, category, seller, price }) {
             </div>
           </div>
 
-          <div className="mb-4 md:mb-6">
-            <span className="mb-3 inline-block text-sm font-semibold text-gray-500 md:text-base">
-              Color
-            </span>
-
-            <div className="flex flex-wrap gap-2">
-              <span className="h-8 w-8 rounded-full border bg-gray-800 ring-2 ring-gray-800 ring-offset-1 transition duration-100"></span>
-              <button
-                type="button"
-                className="h-8 w-8 rounded-full border bg-gray-500 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"
-              ></button>
-              <button
-                type="button"
-                className="h-8 w-8 rounded-full border bg-gray-200 ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"
-              ></button>
-              <button
-                type="button"
-                className="h-8 w-8 rounded-full border bg-white ring-2 ring-transparent ring-offset-1 transition duration-100 hover:ring-gray-200"
-              ></button>
-            </div>
-          </div>
-
-          <div className="mb-8 md:mb-10">
-            <span className="mb-3 inline-block text-sm font-semibold text-gray-500 md:text-base">
-              Size
-            </span>
-
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                className="flex h-8 w-12 items-center justify-center rounded-md border bg-white text-center text-sm font-semibold text-gray-800 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-              >
-                XS
-              </button>
-              <button
-                type="button"
-                className="flex h-8 w-12 items-center justify-center rounded-md border bg-white text-center text-sm font-semibold text-gray-800 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-              >
-                S
-              </button>
-              <span className="flex h-8 w-12 cursor-default items-center justify-center rounded-md border border-indigo-500 bg-indigo-500 text-center text-sm font-semibold text-white">
-                M
-              </span>
-              <button
-                type="button"
-                className="flex h-8 w-12 items-center justify-center rounded-md border bg-white text-center text-sm font-semibold text-gray-800 transition duration-100 hover:bg-gray-100 active:bg-gray-200"
-              >
-                L
-              </button>
-              <span className="flex h-8 w-12 cursor-not-allowed items-center justify-center rounded-md border border-transparent bg-white text-center text-sm font-semibold text-gray-400">
-                XL
-              </span>
-            </div>
-          </div>
-
           <div className="mb-4">
             <div className="flex items-end gap-2">
-              <span className="text-xl font-bold text-gray-800 md:text-2xl">
-                $15.00
+              <span className="text-2xl font-bold text-gray-800 md:text-3xl">
+                {
+                  Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR"
+                  }).format(price)
+                }
               </span>
-              <span className="mb-0.5 text-red-500 line-through">$30.00</span>
             </div>
 
             <span className="text-sm text-gray-500">
-              incl. VAT plus shipping
+              * Belum termasuk biaya eksternal
             </span>
           </div>
+
+          <p>{desc}</p>
 
           <div className="mb-6 flex items-center gap-2 text-gray-500">
             <svg
@@ -197,14 +148,14 @@ function Product({ img, name, desc, category, seller, price }) {
               href="#"
               className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"
             >
-              Add to cart
+              Beli Sekarang
             </a>
 
             <a
               href="#"
               className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
             >
-              Buy now
+              Lihat Barang Lain
             </a>
           </div>
         </div>

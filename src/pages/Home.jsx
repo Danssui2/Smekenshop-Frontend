@@ -8,7 +8,7 @@ import Footer from "../Components/Footer.jsx"
 
 function Home() {
   return (
-   <div>
+   <div className="px-4">
     <Navbar/>
     <Hero/>
     <Highlighted/>

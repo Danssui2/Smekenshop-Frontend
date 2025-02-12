@@ -14,7 +14,7 @@ const Katalog = () => {
           <CardCatalog img="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Makanan"/>
           <CardCatalog img="https://images.unsplash.com/photo-1551232864-3f0890e580d9?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Fashion"/>
           <CardCatalog img="https://images.unsplash.com/photo-1519086588705-c935fdedcc14?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Elektronik"/>
-          <CardCatalog img="https://plus.unsplash.com/premium_photo-1677009834523-367c2e9b281c?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Other"/>
+          <CardCatalog img="https://plus.unsplash.com/premium_photo-1677009834523-367c2e9b281c?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Lainnya"/>
         </div>
       </div>
     </div>

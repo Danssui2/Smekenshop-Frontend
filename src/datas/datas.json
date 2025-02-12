@@ -1,9 +1,9 @@
 [
   {
     "id": "1",
-    "name": "Sambal Pecel Pedas Kemasan 100g",
+    "name": "Seyla elek dengan kandangnya ",
     "description": "lorem ipsim dolor sit amet xonsictour an atmos lonasian",
-    "price": 19000,
+    "price": 1000,
     "category": "Makanan",
     "images": [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
@@ -16,7 +16,7 @@
     }
   },
   {
-    "id": "1",
+    "id": "2",
     "name": "Sambal Pecel sdfgPedas Kemasan 100g",
     "description": "lorem ipsim dolor sit amet xonsictour an atmos lonasian",
     "price": 19000,
@@ -32,7 +32,7 @@
     }
   },
   {
-    "id": "1",
+    "id": "3",
     "name": "Sambal Pecelfgh Pedas Kemasan 100g",
     "description": "lorem ipsim dolor sit amet xonsictour an atmos lonasian",
     "price": 19000,
@@ -48,7 +48,7 @@
     }
   },
   {
-    "id": "1",
+    "id": "4",
     "name": "Sambal Pecel fghjPedas Kemasan 100g",
     "description": "lorem ipsim dolor sit amet xonsictour an atmos lonasian",
     "price": 19000,

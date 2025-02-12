@@ -5,7 +5,7 @@ import { FaRegUser } from "react-icons/fa6"
 function Navbar() {
   return(
     <>
-      <header class="mb-8 border-b fixed top-0 w-full bg-white z-50">
+      <header class="mb-8 border-b fixed top-0 w-full bg-white py-3 md:py-0 z-50">
         <div class="mx-auto flex max-w-screen-2xl items-center justify-between px-4 md:px-8">
           <a href="/" class="inline-flex items-center gap-2.5 text-2xl font-bold text-black md:text-3xl" aria-label="logo">
             <img src={logoStm} class="w-12 lg:w-16" />
