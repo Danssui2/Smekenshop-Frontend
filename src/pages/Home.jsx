@@ -8,14 +8,16 @@ import Footer from "../Components/Footer.jsx"
 
 function Home() {
   return (
-   <div className="px-4">
-    <Navbar/>
-    <Hero/>
-    <Highlighted/>
-    <Katalog/>
-    <HelpForm/>
-    <Footer/>
-   </div>
+    <div>
+        <Navbar />
+      <div className="w-screen px-4 flex flex-col items-center">
+        <Hero />
+        <Highlighted />
+        <Katalog />
+        <HelpForm />
+        <Footer />
+      </div>
+    </div>
   )
 }
 

@@ -2,7 +2,7 @@ import React, {
   useState
 } from 'react'
 
-const Card = ({img, name, seller, price}) => {
+const Card = ({img, name, seller, price, id}) => {
 
   const rupiah = Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -10,7 +10,7 @@ const Card = ({img, name, seller, price}) => {
   }).format(price)
 
   return (
-    <a href='http://localhost:5173/product/5'> 
+    <a href={'http://localhost:5173/product/'+id} >
       <a class="group relative block h-96 overflow-hidden rounded-lg bg-gray-100 shadow-lg">
         <img src={img} loading="lazy" alt="Foto Produk" class="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
     </a>

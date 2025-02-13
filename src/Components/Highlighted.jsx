@@ -8,7 +8,7 @@ const Highlighted = () => {
   console.log(data)
 
   let listCards = datas.map(function(data) {
-    return  <Card img={data.images} name={data.name} seller={data.seller.name} price={data.price}/>
+    return  <Card img={data.images} name={data.name} seller={data.seller.name} price={data.price} id={data.id}/>
   })
   
   return (

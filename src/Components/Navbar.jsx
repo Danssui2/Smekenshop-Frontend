@@ -12,10 +12,10 @@ function Navbar() {
             Smekenshop
           </a>
           <nav class="hidden gap-12 lg:flex 2xl:ml-16">
-            <a href="#home" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Home</a>
-            <a href="#highlighted" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Highlight</a>
-            <a href="#catalog" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Katalog</a>
-            <a href="#footer" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Tentang</a>
+            <a href="http://localhost:5173/#home" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Home</a>
+            <a href="http://localhost:5173/#highlighted" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Highlight</a>
+            <a href="http://localhost:5173/#catalog" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Katalog</a>
+            <a href="http://localhost:5173/#footer" class="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">Tentang</a>
           </nav>
            
           <div class="flex divide-x border-r sm:border-l">
