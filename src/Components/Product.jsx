@@ -2,8 +2,11 @@ import React from "react";
 import { HiOutlineEye } from "react-icons/hi";
 import { TbBrandWechat } from "react-icons/tb";
 import { FiHeart } from "react-icons/fi";
+import { IoIosFlash } from "react-icons/io";
+import { Accordion } from "flowbite-react";
+import { Carousel } from "flowbite-react";
 
-function Product({ img, name, desc, category, seller, price }) {
+function Product({ img, name, desc, category, seller, price, view, interaction, like }) {
   return (
 
     <div className="w-screen flex justify-center">
@@ -15,7 +18,7 @@ function Product({ img, name, desc, category, seller, price }) {
                 <img
                   src={img[0]}
                   loading="lazy"
-                  alt="Photo by Himanshu Dewangan"
+                  alt="Foto Produk"
                   className="h-full w-full object-cover object-center"
                 />
               </div>
@@ -24,7 +27,7 @@ function Product({ img, name, desc, category, seller, price }) {
                 <img
                   src={img[0]}
                   loading="lazy"
-                  alt="Photo by Himanshu Dewangan"
+                  alt="Foto Produk"
                   className="h-full w-full object-cover object-center"
                 />
               </div>
@@ -33,19 +36,21 @@ function Product({ img, name, desc, category, seller, price }) {
                 <img
                   src={img[0]}
                   loading="lazy"
-                  alt="Photo by Himanshu Dewangan"
+                  alt="Foto Produk"
                   className="h-full w-full object-cover object-center"
                 />
               </div>
             </div>
 
-            <div className="relative overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
-              <img
-                src={img[0]}
-                loading="lazy"
-                alt="Photo by Himanshu Dewangan"
-                className="h-full w-full object-cover object-center"
-              />
+            <div className="relative h-[25rem] md:h-[35rem] overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
+              <Carousel slideInterval={3000}>
+                <img
+                  src={img[0]}
+                  loading="lazy"
+                  alt="Foto Produk"
+                  className="h-[25rem] md:h-[35rem] w-full object-cover object-center"
+                />
+              </Carousel>
 
               <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">
                 sale
@@ -86,21 +91,21 @@ function Product({ img, name, desc, category, seller, price }) {
             <div className="flex gap-2">
               <div className="md:mb-6 mb-3 flex items-center">
                 <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
-                  <span className="text-sm">169</span>
+                  <span className="text-sm">{view}</span>
                   <HiOutlineEye />
                 </div>
               </div>
 
               <div className="md:mb-6 mb-3 flex items-center gap-3">
                 <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
-                  <span className="text-sm">169</span>
+                  <span className="text-sm">{interaction}</span>
                   <TbBrandWechat />
                 </div>
               </div>
 
               <div className="md:mb-6 mb-3 flex items-center gap-3">
                 <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
-                  <span className="text-sm">169</span>
+                  <span className="text-sm">{like}</span>
                   <FiHeart />
                 </div>
               </div>
@@ -123,29 +128,39 @@ function Product({ img, name, desc, category, seller, price }) {
               </span>
             </div>
 
-            <p>{desc}</p>
-
-            <div className="mb-6 flex items-center gap-2 text-gray-500">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-                />
-              </svg>
-
-              <span className="text-sm">2-4 day shipping</span>
+            <div className="w-[75%] xl:w-[65%]">
+              <Accordion collapseAll>
+                <Accordion.Panel>
+                  <Accordion.Title>Deskripsi Produk</Accordion.Title>
+                  <Accordion.Content>
+                    <p className="mb-2 text-gray-500 dark:text-gray-400">{desc}</p>
+                  </Accordion.Content>
+                </Accordion.Panel>
+              </Accordion>
             </div>
 
-            <div className="flex gap-2.5">
+            <div class="flex gap-5 w-[65%] justify-between items-center rounded-lg bg-gray-100 p-4 mt-6">
+              <div className="flex gap-5">
+                <div class="h-14 w-14 overflow-hidden rounded-full bg-gray-200 shadow-lg">
+                  <img src="https://images.unsplash.com/photo-1532073150508-0c1df022bdd1?auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by christian ferrer" class="h-full w-full object-cover object-center" />
+                </div>
+
+                <div>
+                  <div class="font-bold text-indigo-500 md:text-lg">{seller.name}</div>
+                  <p class="text-sm text-gray-500 md:text-base">6 Produk</p>
+                </div>
+              </div>
+
+              <button className="p-3 px-6 bg-indigo-500 rounded-xl text-white font-semibold">Lihat Penjual</button>
+
+            </div>
+
+            <div className="mb-2 mt-2 flex items-center gap-2 text-gray-500">
+              <IoIosFlash className="w-5 h-5" />
+              <span className="text-sm">1m - 1h. Fast Response!</span>
+            </div>
+
+            <div className="flex gap-2.5 mb-10">
               <a
                 href="#"
                 className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"

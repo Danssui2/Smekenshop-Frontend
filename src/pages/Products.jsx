@@ -18,6 +18,9 @@ function Products() {
           price={dataProd.price}
           desc={dataProd.description}
           seller={dataProd.seller}
+          view={dataProd.view}
+          interaction={dataProd.interaction}
+          like={dataProd.like}
         />
       </div>
     </div>

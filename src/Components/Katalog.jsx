@@ -3,14 +3,14 @@ import CardCatalog from "./CardCatalog.jsx"
 
 const Katalog = () => {
   return (
-    <div id="catalog" class="bg-white py-6 sm:py-8 lg:py-12">
-      <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-        <h2 class="text-center mb-4 text-2xl font-bold text-gray-800 lg:text-3xl">Katalog</h2>
-        <p class="mx-auto mb-10 md:mb-16 max-w-screen-md text-center text-gray-500 md:text-lg">
+    <div id="catalog" className="bg-white pb-6 sm:pb-8 lg:pb-12">
+      <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
+        <h2 className="text-center mb-4 text-2xl font-bold text-gray-800 lg:text-3xl">Katalog</h2>
+        <p className="mx-auto mb-10 md:mb-16 max-w-screen-md text-center text-gray-500 md:text-lg">
           Seluruh kategori produk ada disini!
         </p>
 
-        <div class="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 md:gap-6 lg:grid-cols-3 xl:grid-cols-4">
           <CardCatalog img="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Makanan"/>
           <CardCatalog img="https://images.unsplash.com/photo-1551232864-3f0890e580d9?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Fashion"/>
           <CardCatalog img="https://images.unsplash.com/photo-1519086588705-c935fdedcc14?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" category="Elektronik"/>

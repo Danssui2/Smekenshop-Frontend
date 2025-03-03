@@ -2,6 +2,7 @@ import Home from './pages/Home.jsx'
 import Post from './pages/Post.jsx'
 import Products from './pages/Products.jsx'
 import Seller from './pages/Seller.jsx'
+import PageNotFound from './pages/PageNotFound.jsx'
 
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from "react-router"
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/post" element={<Post/>} />
       <Route path="/product/:id" element={<Products/>} />
       <Route path="/seller/:id" element={<Seller/>} />
+      <Route path="*" element={<PageNotFound/>} />
     </Routes>
   </BrowserRouter>
 )
