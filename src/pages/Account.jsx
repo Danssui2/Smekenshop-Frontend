@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import seller from "../datas/seller.json";
 import Navbar from "../Components/Navbar.jsx";
 import Card from "../Components/Card.jsx";
+import { HiOutlineEye } from "react-icons/hi";
 import { TbBrandWechat } from "react-icons/tb";
-import { getSellerInfo, getProductsBrief } from "../api.jsx";
+import { FiHeart } from "react-icons/fi";
+import { getUserInfo, getProductsBrief } from "../api.jsx";
 import { HashLoader } from "react-spinners";
 
-function Seller() {
-
-  const sellerid = useParams().id
-
+function Account() {
   const [userData, setUserData] = useState();
   const [productList, setProductList] = useState([]);
   const [listedCard, setlistedCard] = useState([]);
 
+  const token = JSON.parse(localStorage.getItem("userToken"))
+
   const fetchUser = async () => {
-    const response = await getSellerInfo(sellerid);
+    const response = await getUserInfo(token);
     setUserData(response);
+    console.log(response)
+    if (response.role === "admin") {
+      localStorage.setItem("XYZABC_SUPER", "SMEKENSA65")
+      window.location = "/administration";
+    }
   };
 
   const fetchProduct = async () => {
@@ -39,7 +46,13 @@ function Seller() {
   };
 
   useEffect(() => {
-    fetchUser()
+    if (localStorage.getItem("userToken")) {
+      console.log("token exist");
+      fetchUser();
+    } else {
+      console.log("token not exist");
+      window.location = "/login";
+    }
   }, []);
 
   useEffect(() => {
@@ -84,7 +97,7 @@ function Seller() {
                   </div>
                 </div>
 
-                <a
+                {/* <a
                   href={
                     "https://wa.me/" +
                     "+62881036490338" +
@@ -93,8 +106,25 @@ function Seller() {
                   }
                   className="inline-block flex-1 md:ml-20 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
                   Chat Penjual
+                </a> */}
+              </div>
+              <div className="flex gap-4">
+                <a
+                  href="/post"
+                  className="flex items-center rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+                  Edit Profil
+                </a>
+                <a
+                  href="/post"
+                  className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+                  Jual Produk Baru
                 </a>
               </div>
+              <a
+                href="/logout"
+                className="inline-block flex-1 md:w-40 rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+                Logout
+              </a>
               <div className="grid gap-x-4 gap-y-8 grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-6">
                 {listedCard}
               </div>
@@ -110,4 +140,4 @@ function Seller() {
   );
 }
 
-export default Seller;
+export default Account;

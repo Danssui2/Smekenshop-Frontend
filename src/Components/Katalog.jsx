@@ -3,9 +3,9 @@ import CardCatalog from "./CardCatalog.jsx"
 
 const Katalog = () => {
   return (
-    <div id="catalog" className="bg-white pb-6 sm:pb-8 lg:pb-12">
+    <div id="catalog" className="bg-white mt-14 pb-6 sm:pb-8 lg:pb-12">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
-        <h2 className="text-center mb-4 text-2xl font-bold text-gray-800 lg:text-3xl">Katalog</h2>
+        <h2 className="mb-1 text-center text-3xl uppercase font-bold text-gray-800 lg:text-3xl">Katalog</h2>
         <p className="mx-auto mb-10 md:mb-16 max-w-screen-md text-center text-gray-500 md:text-lg">
           Seluruh kategori produk ada disini!
         </p>

@@ -9,11 +9,25 @@ import Upload from "../Components/Upload";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-function Post() {
-  const [value, setValue] = useState("");
+import { uploadProduct } from "../api";
 
-  const options = ["one", "two", "three"];
+function Post() { 
+  const [value, setvalue] = useState([]);
+  const [files, setFiles] = useState([]);
+  const [name, setname] = useState('');
+  const [description, setdescription] = useState('');
+  const [category, setcategory] = useState('Makanan');
+  const [price, setprice] = useState(10000);
+
+
+  const options = ["Makanan", "Pakaian", "Elektronik", "Lainnya"];
   const defaultOption = options[0];
+
+  const seller_id = localStorage.getItem("seller_id");
+
+  const uploadHandler = () => {
+    uploadProduct(files, name, description, category, price, seller_id)
+  }
 
   return (
     <>
@@ -27,15 +41,16 @@ function Post() {
               </h2>
             </div>
 
-            <form className="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+            <form onSubmit={(e) => e.preventDefault()} className="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
               <div className="col-span-2">
                 <label
-                  for="Nama Produk"
+                  htmlFor="Nama Produk"
                   className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                 >
                   Nama Produk
                 </label>
                 <input
+                  onChange={(e) => setname(e.target.value)}
                   name="Nama Produk"
                   className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                 />
@@ -43,7 +58,7 @@ function Post() {
 
               <div className="col-span-2">
                 <label
-                  for="Harga"
+                  htmlFor="Harga"
                   className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                 >
                   Harga
@@ -55,15 +70,15 @@ function Post() {
                   prefix="Rp."
                   placeholder="Rp.10,000"
                   decimalsLimit={2}
-                  onValueChange={(value, name, values) =>
-                    console.log(value, name, values)
+                  onValueChange={(values) =>
+                    setprice(values)
                   }
                 />
               </div>
 
               <div className="col-span-2">
                 <label
-                  for="Harga"
+                  htmlFor="Harga"
                   className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
                 >
                   Deskripsi
@@ -72,7 +87,7 @@ function Post() {
                   className="h-32"
                   theme="snow"
                   value={value}
-                  onChange={setValue}
+                  onChange={(e) => {console.log(e); setvalue(e); setdescription(e)}}
                 />
               </div>
 
@@ -83,19 +98,20 @@ function Post() {
                 <Dropdown
                   options={options}
                   value={defaultOption}
+                  onChange={(e) => setcategory(e.value)}
                   placeholder="Pilih Kategori"
                 />
               </div>
 
-              <div className="col-span-2">
+              <div className="col-span-2 flex flex-col">
                 <label className="mb-2 inline-block text-sm text-gray-800 sm:text-base">
                   Upload Foto
                 </label>
-                <Upload />
+                <input type="file" accept="image/*" multiple onChange={(e) => setFiles(e.target.files)} name="imgup" id="imgup" />
               </div>
 
               <div className="flex items-center justify-between sm:col-span-2">
-                <button className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">
+                <button onClick={() => uploadHandler()} className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">
                   Unggah
                 </button>
               </div>

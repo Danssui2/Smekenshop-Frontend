@@ -11,11 +11,223 @@
     ],
     "seller": {
       "id": "56789",
-      "name": "Toko Gadget XYZ"
+      "name": "Toko Gadget XYZ",
+      "profile": "",
+      "products_total": 4
     },
     "view": 100,
     "interaction": 25,
     "like": 32,
     "__date": "01/23"
+  },
+  {
+    "id": "1",
+    "name": "Ayam Goreng Spesial",
+    "description": "Ayam goreng crispy dengan bumbu rahasia yang lezat.",
+    "price": 25000,
+    "category": "Makanan",
+    "images": [
+      "https://image.shutterstock.com/image-photo/ayam-goreng-260nw-123456789.jpg",
+      "https://image.shutterstock.com/image-photo/ayam-goreng-260nw-987654321.jpg"
+    ],
+    "seller": {
+      "id": "12345",
+      "name": "Warung Makan Sederhana",
+      "profile": "https://example.com/profiles/warung.jpg",
+      "products_total": 10
+    },
+    "view": 150,
+    "interaction": 40,
+    "like": 75,
+    "__date": "02/25"
+  },
+  {
+    "id": "2",
+    "name": "Laptop Gaming XYZ",
+    "description": "Laptop gaming dengan spesifikasi tinggi untuk pengalaman maksimal.",
+    "price": 15000000,
+    "category": "Elektronik",
+    "images": [
+      "https://image.shutterstock.com/image-photo/gaming-laptop-260nw-234567890.jpg",
+      "https://image.shutterstock.com/image-photo/gaming-laptop-260nw-345678901.jpg"
+    ],
+    "seller": {
+      "id": "67890",
+      "name": "Toko Gadget XYZ",
+      "profile": "https://example.com/profiles/tokogadget.jpg",
+      "products_total": 25
+    },
+    "view": 500,
+    "interaction": 120,
+    "like": 300,
+    "__date": "02/25"
+  },
+  {
+    "id": "3",
+    "name": "Jus Mangga Segar",
+    "description": "Minuman jus mangga alami tanpa pemanis buatan.",
+    "price": 12000,
+    "category": "Minuman",
+    "images": [
+      "https://image.shutterstock.com/image-photo/jus-mangga-260nw-456789012.jpg",
+      "https://image.shutterstock.com/image-photo/jus-mangga-260nw-567890123.jpg"
+    ],
+    "seller": {
+      "id": "54321",
+      "name": "Juice Bar Fresh",
+      "profile": "https://example.com/profiles/juicebar.jpg",
+      "products_total": 15
+    },
+    "view": 200,
+    "interaction": 60,
+    "like": 90,
+    "__date": "02/25"
+  },
+  {
+    "id": "4",
+    "name": "Smartphone Pro Max",
+    "description": "Smartphone terbaru dengan kamera canggih dan baterai tahan lama.",
+    "price": 12000000,
+    "category": "Elektronik",
+    "images": [
+      "https://image.shutterstock.com/image-photo/smartphone-260nw-678901234.jpg",
+      "https://image.shutterstock.com/image-photo/smartphone-260nw-789012345.jpg"
+    ],
+    "seller": {
+      "id": "56789",
+      "name": "Gadget Store",
+      "profile": "https://example.com/profiles/gadgetstore.jpg",
+      "products_total": 30
+    },
+    "view": 750,
+    "interaction": 220,
+    "like": 500,
+    "__date": "02/25"
+  },
+  {
+    "id": "5",
+    "name": "Sepeda Gunung X-Trail",
+    "description": "Sepeda gunung dengan rangka ringan dan suspensi tangguh.",
+    "price": 5000000,
+    "category": "Olahraga",
+    "images": [
+      "https://image.shutterstock.com/image-photo/sepeda-gunung-260nw-890123456.jpg",
+      "https://image.shutterstock.com/image-photo/sepeda-gunung-260nw-901234567.jpg"
+    ],
+    "seller": {
+      "id": "87654",
+      "name": "Toko Sepeda Adventure",
+      "profile": "https://example.com/profiles/tokosepeda.jpg",
+      "products_total": 8
+    },
+    "view": 340,
+    "interaction": 85,
+    "like": 120,
+    "__date": "02/25"
+  },
+  {
+    "id": "6",
+    "name": "Tas Kulit Premium",
+    "description": "Tas kulit asli dengan desain elegan dan tahan lama.",
+    "price": 850000,
+    "category": "Fashion",
+    "images": [
+      "https://image.shutterstock.com/image-photo/tas-kulit-260nw-912345678.jpg",
+      "https://image.shutterstock.com/image-photo/tas-kulit-260nw-123456789.jpg"
+    ],
+    "seller": {
+      "id": "23456",
+      "name": "Luxury Bags Shop",
+      "profile": "https://example.com/profiles/luxurybags.jpg",
+      "products_total": 12
+    },
+    "view": 290,
+    "interaction": 50,
+    "like": 90,
+    "__date": "02/25"
+  },
+  {
+    "id": "7",
+    "name": "Meja Kerja Minimalis",
+    "description": "Meja kerja modern dengan desain minimalis dan bahan berkualitas.",
+    "price": 1800000,
+    "category": "Furniture",
+    "images": [
+      "https://image.shutterstock.com/image-photo/meja-kerja-260nw-234567891.jpg",
+      "https://image.shutterstock.com/image-photo/meja-kerja-260nw-345678912.jpg"
+    ],
+    "seller": {
+      "id": "34567",
+      "name": "Furniture Home",
+      "profile": "https://example.com/profiles/furniturehome.jpg",
+      "products_total": 20
+    },
+    "view": 220,
+    "interaction": 65,
+    "like": 100,
+    "__date": "02/25"
+  },
+  {
+    "id": "8",
+    "name": "Jam Tangan Sport",
+    "description": "Jam tangan sporty dengan fitur tahan air dan GPS.",
+    "price": 2500000,
+    "category": "Aksesoris",
+    "images": [
+      "https://image.shutterstock.com/image-photo/jam-tangan-260nw-456789013.jpg",
+      "https://image.shutterstock.com/image-photo/jam-tangan-260nw-567890124.jpg"
+    ],
+    "seller": {
+      "id": "45678",
+      "name": "Watch Center",
+      "profile": "https://example.com/profiles/watchcenter.jpg",
+      "products_total": 15
+    },
+    "view": 400,
+    "interaction": 90,
+    "like": 180,
+    "__date": "02/25"
+  },
+  {
+    "id": "9",
+    "name": "Headset Bluetooth Pro",
+    "description": "Headset nirkabel dengan kualitas suara HD dan noise cancelling.",
+    "price": 700000,
+    "category": "Elektronik",
+    "images": [
+      "https://image.shutterstock.com/image-photo/headset-bluetooth-260nw-678901235.jpg",
+      "https://image.shutterstock.com/image-photo/headset-bluetooth-260nw-789012346.jpg"
+    ],
+    "seller": {
+      "id": "56789",
+      "name": "Toko Gadget XYZ",
+      "profile": "https://example.com/profiles/tokogadget.jpg",
+      "products_total": 25
+    },
+    "view": 600,
+    "interaction": 150,
+    "like": 250,
+    "__date": "02/25"
+  },
+  {
+    "id": "10",
+    "name": "Kompor Gas 2 Tungku",
+    "description": "Kompor gas dengan desain modern dan hemat energi.",
+    "price": 550000,
+    "category": "Peralatan Rumah Tangga",
+    "images": [
+      "https://image.shutterstock.com/image-photo/kompor-gas-260nw-890123457.jpg",
+      "https://image.shutterstock.com/image-photo/kompor-gas-260nw-901234568.jpg"
+    ],
+    "seller": {
+      "id": "67890",
+      "name": "Home Appliances Store",
+      "profile": "https://example.com/profiles/homeappliances.jpg",
+      "products_total": 18
+    },
+    "view": 180,
+    "interaction": 40,
+    "like": 80,
+    "__date": "02/25"
   }
 ]

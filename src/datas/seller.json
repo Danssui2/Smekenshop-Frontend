@@ -1,10 +1,19 @@
 [
     {
         "id": 0,
-        "name": "Anjays",
+        "name": "Teko Kelontong Pak Amba",
+        "profile": "https://images.unsplash.com/photo-1532073150508-0c1df022bdd1?auto=format&q=75&fit=crop&w=256",
         "instance": "siswa",
         "products": [0,1],
         "whatsapp": "0823462456",
-        "interactions": 1
+        "view_total": 200,
+        "interactions": 1,
+        "like_total": 100,
+        "socialmedia": {
+            "ig": "",
+            "fb": "",
+            "tw": "",
+            "yt": ""           
+        }
     }
 ]

@@ -8,7 +8,12 @@ export default {
     flowbite.content(),
     ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        geist: ["Geist", "sans-serif"],
+        pacifico: ["Pacifico", "sans-serif"],
+      }
+    },
   },
   plugins: [
     flowbite.plugin(),

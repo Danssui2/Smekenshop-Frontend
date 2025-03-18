@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { HiOutlineEye } from "react-icons/hi";
 import { TbBrandWechat } from "react-icons/tb";
 import { FiHeart } from "react-icons/fi";
@@ -6,67 +6,90 @@ import { IoIosFlash } from "react-icons/io";
 import { Accordion } from "flowbite-react";
 import { Carousel } from "flowbite-react";
 
-function Product({ img, name, desc, category, seller, price, view, interaction, like }) {
-  return (
+function Product({
+  img,
+  name,
+  desc,
+  category,
+  seller,
+  price,
+  view,
+  interaction,
+  like,
+  id
+}) {
+  const joinedLinks = img?.map((i) => i.link);
+  // const joinedLinks = [
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
+  // ]
 
+  const mapped = joinedLinks?.map((data, i) => {
+    return (
+      <img
+        src={data}
+        loading="lazy"
+        key={i}
+        alt="Foto Produk"
+        className="h-[25rem] md:h-[35rem] w-full object-cover object-center"
+      />
+    );
+  });
+
+  const sideimgmapper = joinedLinks?.map((data, i) => {
+    if (i < 4) {
+      return (
+        <div key={i} className="overflow-hidden rounded-lg bg-gray-100">
+          <img
+            src={data}
+            loading="lazy"
+            alt="Foto Produk"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
+      );
+    }
+  });
+
+  useEffect(() => {
+    document.getElementById("descholder").innerHTML = desc;
+  }, [desc]);
+  useEffect(() => {
+    console.log(JSON.parse(localStorage.getItem("cart")))
+  }, []);
+
+  const handleCart = () => {
+    const carts = JSON.parse(localStorage.getItem("cart"))
+    localStorage.setItem("cart", JSON.stringify(carts.concat({"seller": seller.id, "sellerName": seller.name, "id": id,})));
+    console.log(carts)
+  }
+  
+
+
+  return (
     <div className="w-screen flex justify-center">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="grid gap-8 md:grid-cols-2">
           <div className="grid gap-4 lg:grid-cols-5">
             <div className="order-last flex gap-4 lg:order-none lg:flex-col">
-              <div className="overflow-hidden rounded-lg bg-gray-100">
-                <img
-                  src={img[0]}
-                  loading="lazy"
-                  alt="Foto Produk"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-
-              <div className="overflow-hidden rounded-lg bg-gray-100">
-                <img
-                  src={img[0]}
-                  loading="lazy"
-                  alt="Foto Produk"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
-
-              <div className="overflow-hidden rounded-lg bg-gray-100">
-                <img
-                  src={img[0]}
-                  loading="lazy"
-                  alt="Foto Produk"
-                  className="h-full w-full object-cover object-center"
-                />
-              </div>
+              {sideimgmapper}
             </div>
 
             <div className="relative h-[25rem] md:h-[35rem] overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
-              <Carousel slideInterval={3000}>
-                <img
-                  src={img[0]}
-                  loading="lazy"
-                  alt="Foto Produk"
-                  className="h-[25rem] md:h-[35rem] w-full object-cover object-center"
-                />
-              </Carousel>
-
-              <span className="absolute left-0 top-0 rounded-br-lg bg-red-500 px-3 py-1.5 text-sm uppercase tracking-wider text-white">
-                sale
-              </span>
-
+              <Carousel slideInterval={3000}>{mapped}</Carousel>
               <a
                 href="#"
-                className="absolute right-4 top-4 inline-block rounded-lg border bg-white px-3.5 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:text-gray-700 md:text-base"
-              >
+                className="absolute right-4 top-4 inline-block rounded-lg border bg-white px-3.5 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:text-gray-700 md:text-base">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
+                  stroke="currentColor">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -114,12 +137,10 @@ function Product({ img, name, desc, category, seller, price, view, interaction, 
             <div className="mb-4">
               <div className="flex items-end gap-2">
                 <span className="text-2xl font-bold text-gray-800 md:text-3xl">
-                  {
-                    Intl.NumberFormat("id-ID", {
-                      style: "currency",
-                      currency: "IDR"
-                    }).format(price)
-                  }
+                  {Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  }).format(price)}
                 </span>
               </div>
 
@@ -133,26 +154,38 @@ function Product({ img, name, desc, category, seller, price, view, interaction, 
                 <Accordion.Panel>
                   <Accordion.Title>Deskripsi Produk</Accordion.Title>
                   <Accordion.Content>
-                    <p className="mb-2 text-gray-500 dark:text-gray-400">{desc}</p>
+                    <div id="descholder"></div>
                   </Accordion.Content>
                 </Accordion.Panel>
               </Accordion>
             </div>
 
-            <div class="flex gap-5 w-[65%] justify-between items-center rounded-lg bg-gray-100 p-4 mt-6">
+            <div className="flex gap-5 md:w-[65%] justify-between items-center rounded-lg bg-gray-100 p-4 mt-6">
               <div className="flex gap-5">
-                <div class="h-14 w-14 overflow-hidden rounded-full bg-gray-200 shadow-lg">
-                  <img src="https://images.unsplash.com/photo-1532073150508-0c1df022bdd1?auto=format&q=75&fit=crop&w=256" loading="lazy" alt="Photo by christian ferrer" class="h-full w-full object-cover object-center" />
+                <div className="h-14 w-14 overflow-hidden rounded-full bg-gray-200 shadow-lg">
+                  <img
+                    src={seller?.profile_photo}
+                    loading="lazy"
+                    alt="Photo by christian ferrer"
+                    className="h-full w-full object-cover object-center"
+                  />
                 </div>
 
                 <div>
-                  <div class="font-bold text-indigo-500 md:text-lg">{seller.name}</div>
-                  <p class="text-sm text-gray-500 md:text-base">6 Produk</p>
+                  <div className="font-bold text-indigo-500 md:text-lg">
+                    {seller?.name}
+                  </div>
+                  <p className="text-sm text-gray-500 md:text-base">
+                    {seller?.products.length + " Produk"}
+                  </p>
                 </div>
               </div>
 
-              <button className="p-3 px-6 bg-indigo-500 rounded-xl text-white font-semibold">Lihat Penjual</button>
-
+              <a
+                href={"/seller/" + seller?.id}
+                className="p-3 px-6 bg-indigo-500 rounded-xl text-white font-semibold">
+                Lihat Penjual
+              </a>
             </div>
 
             <div className="mb-2 mt-2 flex items-center gap-2 text-gray-500">
@@ -162,18 +195,23 @@ function Product({ img, name, desc, category, seller, price, view, interaction, 
 
             <div className="flex gap-2.5 mb-10">
               <a
-                href="#"
-                className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"
-              >
+                href={
+                  "https://wa.me/" +
+                  "+62881036490338" +
+                  "?text=" +
+                  "Hai, saya tertarik dengan produk " +
+                  name +
+                  " anda. Apakah barangnya masih ada?"
+                }
+                className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
                 Beli Sekarang
               </a>
 
-              <a
-                href="#"
-                className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
-              >
-                Lihat Barang Lain
-              </a>
+              <button
+                onClick={() => handleCart()}
+                className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
+                Tambahkan ke keranjang
+              </button>
             </div>
           </div>
         </div>
