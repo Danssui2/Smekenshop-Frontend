@@ -40,7 +40,7 @@ function Search() {
         <h1 className="font-semibold text-xl md:text-2xl">
           Hasil Pencarian Dari: {query}
         </h1>
-        <div className="grid mt-14 place-items-center gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        <div className="grid mt-14 place-items-center gap-4 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {cards}
         </div>
       </div>
