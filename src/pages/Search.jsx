@@ -16,7 +16,7 @@ function Search() {
       return (
         <Card
           key={i}
-          img={data.images[0]}
+          img={data.images[0].link}
           name={data.product_name}
           seller={data.seller.seller_id}
           sellerId={data.seller.seller_id}

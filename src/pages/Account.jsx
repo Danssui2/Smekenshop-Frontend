@@ -33,7 +33,7 @@ function Account() {
       const lo = (
         <Card
           key={i}
-          img={res.images[0]}
+          img={res.images[0].link}
           name={res.product_name}
           seller={userData?.name}
           sellerId={userData?.id}
@@ -70,7 +70,7 @@ function Account() {
               <div className="flex flex-col md:flex-row gap-6 items-center">
                 <div className="h-32 w-32 overflow-hidden rounded-full border-4 border-indigo-500 bg-gray-200 shadow-lg">
                   <img
-                    src={userData?.profile}
+                    src={userData?.profile_photo}
                     loading="lazy"
                     alt="Profile"
                     className="h-full w-full object-cover object-center"
@@ -89,7 +89,7 @@ function Account() {
                       <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 p-4 text-white">
                         <TbBrandWechat />
                         <span className="text-sm">
-                          {userData?.interactions}
+                          {userData?.statistics.total_interaction}
                         </span>
                         <span>interactions</span>
                       </div>
