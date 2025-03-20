@@ -89,7 +89,7 @@ function Account() {
                       <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 p-4 text-white">
                         <TbBrandWechat />
                         <span className="text-sm">
-                          {userData?.interactions}
+                          {userData?.total_interaction}
                         </span>
                         <span>interactions</span>
                       </div>
