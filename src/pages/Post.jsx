@@ -4,7 +4,6 @@ import "react-quill/dist/quill.snow.css";
 
 import Navbar from "../Components/Navbar";
 import CurrencyInput from "react-currency-input-field";
-import Upload from "../Components/Upload";
 
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
@@ -18,6 +17,7 @@ function Post() {
   const [description, setdescription] = useState('');
   const [category, setcategory] = useState('Makanan');
   const [price, setprice] = useState(10000);
+  const [stock, setstock] = useState(10);
 
 
   const options = ["Makanan", "Pakaian", "Elektronik", "Lainnya"];
@@ -26,13 +26,14 @@ function Post() {
   const seller_id = localStorage.getItem("seller_id");
 
   const uploadHandler = () => {
-    uploadProduct(files, name, description, category, price, seller_id)
+    document.getElementById("submitpost").disabled = true;
+    uploadProduct(files, name, description, category, price, seller_id, stock)
   }
 
   return (
     <>
       <Navbar />
-      <div className="flex justify-center w-screen mt-[20%] lg:mt-[8%]">
+      <div className="flex justify-center w-screen mt-[20%] lg:mt-[8%] pb-[4rem] md:pb-0">
         <div className="bg-white py-6 sm:py-8 lg:py-12">
           <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
             <div className="mb-10 md:mb-16">
@@ -41,7 +42,7 @@ function Post() {
               </h2>
             </div>
 
-            <form onSubmit={(e) => e.preventDefault()} className="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
+            <form onSubmit={(e) => {e.preventDefault(); uploadHandler()}} className="mx-auto grid max-w-screen-md gap-4 sm:grid-cols-2">
               <div className="col-span-2">
                 <label
                   htmlFor="Nama Produk"
@@ -52,6 +53,8 @@ function Post() {
                 <input
                   onChange={(e) => setname(e.target.value)}
                   name="Nama Produk"
+                  required
+                  maxLength={20}
                   className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                 />
               </div>
@@ -66,6 +69,7 @@ function Post() {
                 <CurrencyInput
                   className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                   id="input-example"
+                  required
                   name="input-name"
                   prefix="Rp."
                   placeholder="Rp.10,000"
@@ -73,6 +77,23 @@ function Post() {
                   onValueChange={(values) =>
                     setprice(values)
                   }
+                />
+              </div>
+
+              <div className="col-span-2">
+                <label
+                  htmlFor="Stock Produk"
+                  className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                >
+                  Stock Produk
+                </label>
+                <input
+                  onChange={(e) => setstock(e.target.value)}
+                  name="Stock Produk"
+                  type="number"
+                  required
+                  maxLength={4}
+                  className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                 />
               </div>
 
@@ -87,7 +108,7 @@ function Post() {
                   className="h-32"
                   theme="snow"
                   value={value}
-                  onChange={(e) => {console.log(e); setvalue(e); setdescription(e)}}
+                  onChange={(e) => {setvalue(e); setdescription(e)}}
                 />
               </div>
 
@@ -107,13 +128,11 @@ function Post() {
                 <label className="mb-2 inline-block text-sm text-gray-800 sm:text-base">
                   Upload Foto
                 </label>
-                <input type="file" accept="image/*" multiple onChange={(e) => setFiles(e.target.files)} name="imgup" id="imgup" />
+                <input type="file" required accept="image/*" multiple onChange={(e) => setFiles(e.target.files)} name="imgup" id="imgup" />
               </div>
 
               <div className="flex items-center justify-between sm:col-span-2">
-                <button onClick={() => uploadHandler()} className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base">
-                  Unggah
-                </button>
+                <input id="submitpost" type="submit" className="inline-block rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 md:text-base"/>
               </div>
 
               <p className="text-xs text-gray-400">

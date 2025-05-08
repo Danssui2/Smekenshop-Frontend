@@ -32,9 +32,14 @@ body {
   padding: 0;
   display: flex;
   overflow-x: hidden;
-  margin-bottom: 4rem;
 }
 
 #drawer {
   position: absolute;
 }
+
+/* @media screen and (max-width: 600px) {
+  body {
+    margin-bottom: 4rem;
+  }
+} */

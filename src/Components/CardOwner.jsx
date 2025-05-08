@@ -2,7 +2,7 @@ import React, {
   useState
 } from 'react'
 
-const Card = ({ img, name, seller, price, id, sellerId }) => {
+const CardOwner = ({ img, name, seller, price, id, sellerId, status }) => {
 
   const rupiah = Intl.NumberFormat("id-ID", {
     style: "currency",
@@ -12,7 +12,7 @@ const Card = ({ img, name, seller, price, id, sellerId }) => {
 
   return (
     <>
-      <a className='flex flex-col w-40 md:w-52' href={'/product/' + sellerId + "/" + id}>
+      <a className='flex flex-col w-40 md:w-52' href={'/product/edit/' + sellerId + "/" + id}>
         <div className="group relative block w-full h-52 md:h-72 overflow-hidden rounded-lg bg-gray-100 shadow-lg">
           <img src={img} loading="lazy" alt="Foto Produk" className="h-full w-full object-cover object-center transition duration-200 group-hover:scale-110" />
         </div>
@@ -32,4 +32,4 @@ const Card = ({ img, name, seller, price, id, sellerId }) => {
   )
 }
 
-export default Card
+export default CardOwner

@@ -2,9 +2,13 @@ import React, { useEffect } from "react";
 import { HiOutlineEye } from "react-icons/hi";
 import { TbBrandWechat } from "react-icons/tb";
 import { FiHeart } from "react-icons/fi";
-import { IoIosFlash } from "react-icons/io";
+import { IoIosFlash, IoMdHeartEmpty } from "react-icons/io";
 import { Accordion } from "flowbite-react";
 import { Carousel } from "flowbite-react";
+import { toast } from "react-toastify";
+import { updateProduct } from "../api";
+import { IoHeart } from "react-icons/io5";
+import { FiBox } from "react-icons/fi";
 
 function Product({
   img,
@@ -16,17 +20,13 @@ function Product({
   view,
   interaction,
   like,
-  id
+  id,
+  stock,
 }) {
+  const [isliked, setIsliked] = React.useState(false);
+  const [oneclick, setoneclick] = React.useState(false);
+
   const joinedLinks = img?.map((i) => i.link);
-  // const joinedLinks = [
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4fPHQZQL-iMO4Vcg_TQ_OZ2cFB4L3D6dX0n2je-tZlT_KORwbzvncYuAS&s=10",
-  // ]
 
   const mapped = joinedLinks?.map((data, i) => {
     return (
@@ -48,30 +48,83 @@ function Product({
             src={data}
             loading="lazy"
             alt="Foto Produk"
-            className="h-full w-full object-cover object-center"
+            className="md:h-32 md:w-32 h-20 w-20 object-cover object-center"
           />
         </div>
       );
     }
   });
 
+  const liked = JSON.parse(localStorage.getItem("like"));
+  const handleLike = async () => {
+    if (!oneclick) {
+      setoneclick(true);
+      if (isliked) {
+        const finded = liked.findIndex((e) => e === id);
+        console.log(finded);
+        if (finded !== -1) {
+          liked.splice(finded, 1);
+          localStorage.setItem("like", JSON.stringify(liked));
+          setIsliked(false);
+          await updateProduct(
+            seller.id,
+            id,
+            "approved",
+            '{like: "-"}'
+          );
+          window.location.reload();
+        }
+      } else {
+        localStorage.setItem("like", JSON.stringify(liked.concat(id)));
+        setIsliked(true);
+        await updateProduct(seller.id, id, "approved", '{like: "+"}');
+        window.location.reload();
+      }
+    }
+  };
+
+  const handleInteract = async () => {
+    window.open(
+      "https://wa.me/" +
+        seller.whatsapp +
+        "?text=" +
+        "Hai, saya tertarik dengan produk " +
+        name +
+        " anda. Apakah barangnya masih ada?"
+    );
+    await updateProduct(seller.id, id, "approved", "{interaction, stock}");
+  };
+
   useEffect(() => {
     document.getElementById("descholder").innerHTML = desc;
   }, [desc]);
   useEffect(() => {
-    console.log(JSON.parse(localStorage.getItem("cart")))
+    if (liked.includes(id)) {
+      setIsliked(true);
+    } else {
+      setIsliked(false);
+    }
   }, []);
 
   const handleCart = () => {
-    const carts = JSON.parse(localStorage.getItem("cart"))
-    localStorage.setItem("cart", JSON.stringify(carts.concat({"seller": seller.id, "sellerName": seller.name, "id": id,})));
-    console.log(carts)
-  }
-  
-
+    const carts = JSON.parse(localStorage.getItem("cart"));
+    const finded = carts.findIndex((e) => e.id === id);
+    if (finded == -1) {
+      localStorage.setItem(
+        "cart",
+        JSON.stringify(
+          carts.concat({ seller: seller.id, sellerName: seller.name, id: id })
+        )
+      );
+      toast.success("Berhasil Ditambahkan Ke Keranjang");
+    } else {
+      toast.error("Barang Sudah Ada Di Keranjang");
+    }
+    console.log(carts);
+  };
 
   return (
-    <div className="w-screen flex justify-center">
+    <div className="w-screen flex justify-center pb-[6rem] md:pb-0">
       <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
         <div className="grid gap-8 md:grid-cols-2">
           <div className="grid gap-4 lg:grid-cols-5">
@@ -81,29 +134,21 @@ function Product({
 
             <div className="relative h-[25rem] md:h-[35rem] overflow-hidden rounded-lg bg-gray-100 lg:col-span-4">
               <Carousel slideInterval={3000}>{mapped}</Carousel>
-              <a
-                href="#"
+              <button
+                onClick={() => handleLike()}
                 className="absolute right-4 top-4 inline-block rounded-lg border bg-white px-3.5 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:text-gray-700 md:text-base">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
-              </a>
+                {isliked ? (
+                  <IoHeart className="md:w-10 md:h-10 w-6 h-6 text-red-500" />
+                ) : (
+                  <IoMdHeartEmpty className="md:w-10 md:h-10 w-6 h-6" />
+                )}
+              </button>
             </div>
           </div>
 
           <div className="md:py-8">
             <div className="mb-2 md:mb-3">
-              <span className="mb-0.5 inline-block text-gray-500">
+              <span className="mb-[1px] inline-block text-gray-500">
                 {category}
               </span>
               <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
@@ -111,34 +156,42 @@ function Product({
               </h2>
             </div>
 
-            <div className="flex gap-2">
-              <div className="md:mb-6 mb-3 flex items-center">
-                <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
+            <div className="flex gap-2 mb-2">
+              <div className="flex items-center">
+                <div className="flex p-2 items-center gap-1 rounded-full bg-indigo-500 px-3 text-white">
                   <span className="text-sm">{view}</span>
-                  <HiOutlineEye />
+                  <HiOutlineEye className="text-xl" />
                 </div>
               </div>
 
-              <div className="md:mb-6 mb-3 flex items-center gap-3">
-                <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
+              <div className="flex items-center gap-3">
+                <div className="flex p-2 items-center gap-1 rounded-full bg-indigo-500 px-3 text-white">
                   <span className="text-sm">{interaction}</span>
-                  <TbBrandWechat />
+                  <TbBrandWechat className="text-xl" />
                 </div>
               </div>
 
-              <div className="md:mb-6 mb-3 flex items-center gap-3">
-                <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 px-2 text-white">
+              <div className="flex items-center gap-3">
+                <div className="flex p-2 items-center gap-1 rounded-full bg-indigo-500 px-3 text-white">
                   <span className="text-sm">{like}</span>
-                  <FiHeart />
+                  <FiHeart className="text-xl" />
                 </div>
+              </div>
+              <div className="flex gap-2 bg-indigo-500 text-white p-2 px-4 rounded-full w-fit">
+                <div className="flex gap-2 items-center">
+                  <FiBox className="text-xl" />
+                  <h4>stock</h4>
+                </div>
+                <p>{stock}</p>
               </div>
             </div>
 
             <div className="mb-4">
               <div className="flex items-end gap-2">
-                <span className="text-2xl font-bold text-gray-800 md:text-3xl">
+                <span className="text-3xl font-bold text-gray-800 md:text-4xl">
                   {Intl.NumberFormat("id-ID", {
                     style: "currency",
+                    maximumFractionDigits: 0,
                     currency: "IDR",
                   }).format(price)}
                 </span>
@@ -149,7 +202,7 @@ function Product({
               </span>
             </div>
 
-            <div className="w-[75%] xl:w-[65%]">
+            <div className="w-full md:w-[75%] xl:w-[65%]">
               <Accordion collapseAll>
                 <Accordion.Panel>
                   <Accordion.Title>Deskripsi Produk</Accordion.Title>
@@ -183,7 +236,7 @@ function Product({
 
               <a
                 href={"/seller/" + seller?.id}
-                className="p-3 px-6 bg-indigo-500 rounded-xl text-white font-semibold">
+                className="p-2 px-4 bg-indigo-500 rounded-xl text-center text-sm text-white font-semibold">
                 Lihat Penjual
               </a>
             </div>
@@ -193,23 +246,16 @@ function Product({
               <span className="text-sm">1m - 1h. Fast Response!</span>
             </div>
 
-            <div className="flex gap-2.5 mb-10">
-              <a
-                href={
-                  "https://wa.me/" +
-                  "+62881036490338" +
-                  "?text=" +
-                  "Hai, saya tertarik dengan produk " +
-                  name +
-                  " anda. Apakah barangnya masih ada?"
-                }
-                className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+            <div className="flex gap-2.5 mb-10 md:w-4/6">
+              <button
+                onClick={() => handleInteract()}
+                className="flex-1 flex items-center justify-center rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
                 Beli Sekarang
-              </a>
+              </button>
 
               <button
                 onClick={() => handleCart()}
-                className="inline-block rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
+                className="inline-block flex-1 rounded-lg bg-gray-200 px-8 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base">
                 Tambahkan ke keranjang
               </button>
             </div>

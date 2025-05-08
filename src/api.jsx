@@ -1,6 +1,7 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./style/index.css";
+import imageCompression from "browser-image-compression";
 
 export const api = axios.create({
   baseURL: "https://smekenshop-backend.vercel.app/",
@@ -11,10 +12,6 @@ api.interceptors.request.use((req) => {
     server_id:
       "qgivsx4lrp0b9zwo61umd2yf7kjn3atec8h5nlcsxhid2p81zoubwryt3v4amqe7g0956fjk",
   };
-  if (localStorage.getItem("userToken")) {
-    //req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('userToken'))}`
-    //req.headers.refresh = `Bearer ${JSON.parse(localStorage.getItem('refreshToken'))}`
-  }
   return req;
 });
 
@@ -127,20 +124,42 @@ export const uploadProduct = async (
   description,
   category,
   price,
-  seller_id
+  seller_id,
+  stock
 ) => {
-  console.log(file, name, description, category, price, seller_id);
+  console.log(file, name, description, category, price, seller_id, stock);
+  toast.loading("Mohon tunggu sebentar");
+
+  const compressedFiles = [];
+
+  for (let i = 0; i < file.length; i++) {
+    try {
+      const compressed = await imageCompression(file[i], {
+        maxSizeMB: 0.2,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      });
+      console.log(
+        `File ke-${i + 1} dikompres: ${compressed.size / 1024 / 1024} MB`
+      );
+      compressedFiles.push(compressed);
+    } catch (error) {
+      toast.error(`Gagal kompres file ke-${i + 1}: ${error.message}`);
+      return;
+    }
+  }
 
   await api
     .post(
       "/product/upload",
       {
-        file: file,
+        file: compressedFiles,
         name: name,
         description: description,
         category: category,
         price: price,
         seller_id: seller_id,
+        stock: stock,
         server_id:
           "qgivsx4lrp0b9zwo61umd2yf7kjn3atec8h5nlcsxhid2p81zoubwryt3v4amqe7g0956fjk",
       },
@@ -152,19 +171,21 @@ export const uploadProduct = async (
     )
     .then((res) => {
       console.log(res.data);
+      window.location = "/account";
     })
     .catch((err) => {
       console.log(err);
+      toast.error("Ukuran file terlalu besar");
     });
 };
 
-export const getProducts = async (seller, product) => {
+export const getProducts = async (seller, product, status) => {
   let sellerInfo = await getSellerInfo(seller);
   let result = await api
     .post("/verify/product", {
       seller_id: seller,
       product_id: product,
-      status: "approved",
+      status: status,
     })
     .then((res) => {
       console.log([res.data.result, sellerInfo]);
@@ -174,11 +195,12 @@ export const getProducts = async (seller, product) => {
   return result;
 };
 
-export const getProductsBrief = async (seller, product) => {
+export const getProductsBrief = async (seller, product, status) => {
   let result = await api
     .post("/verify/product", {
       seller_id: seller,
       product_id: product,
+      status: status,
     })
     .then((res) => {
       console.log(res.data.result);
@@ -190,7 +212,9 @@ export const getProductsBrief = async (seller, product) => {
 
 export const getHighlight = async () => {
   let res = await api
-    .post("/product/summary")
+    .post("/product/summary", {
+      limit: 12,
+    })
     .then((res) => {
       console.log(res.data.result);
       return res.data.result;
@@ -201,10 +225,11 @@ export const getHighlight = async () => {
   return res;
 };
 
-export const search = async (query) => {
+export const search = async (query, category) => {
   let res = await api
     .post("/product/find", {
       query: query,
+      category: category,
     })
     .then((res) => {
       console.log(res.data.result);
@@ -223,21 +248,172 @@ export const getRejectPendingPosts = async (status) => {
       console.log(res.data.result);
       return res.data.result;
     })
-    .catch((err) => console.log(err.response.data));
+    .catch((err) => toast.error(err.response.data));
   return res;
 };
 
 export const aproveRejectPost = async (id, action, status, msg) => {
-  console.log(status)
+  console.log(status);
+  toast.loading("Mohon Tunggu Sebentar");
   let res = await api
-    .post("/product/review", { status: "pendings", product_id: id, action: action, message: msg })
+    .post("/product/review", {
+      status: "pendings",
+      product_id: id,
+      action: action,
+      message: msg,
+    })
     .then((res) => {
       console.log(res.data.result);
-      window.location = "/administration"
+      window.location = "/admin";
       return res.data.result;
     })
-    .catch((err) => console.log(err.response.data));
+    .catch((err) => toast.error(err.response.data));
   return res;
+};
+
+export const updateProduct = async (
+  sellerid,
+  productid,
+  status,
+  data,
+  file
+) => {
+  console.log(sellerid, productid, status, data, file);
+  toast.loading("Mohon Tunggu Sebentar");
+  const payload = {
+    seller_id: sellerid,
+    product_id: productid,
+    status: status,
+    action: "update",
+    data: data,
+    file: file,
+    server_id:
+      "qgivsx4lrp0b9zwo61umd2yf7kjn3atec8h5nlcsxhid2p81zoubwryt3v4amqe7g0956fjk",
+  };
+
+  if (file && file.length > 0) {
+    const compressedFiles = [];
+
+    for (let i = 0; i < file.length; i++) {
+      try {
+        const compressed = await imageCompression(file[i], {
+          maxSizeMB: 0.2,
+          maxWidthOrHeight: 1920,
+          useWebWorker: true,
+        });
+        console.log(
+          `File ke-${i + 1} dikompres: ${compressed.size / 1024 / 1024} MB`
+        );
+        compressedFiles.push(compressed);
+      } catch (error) {
+        toast.error(`Gagal kompres file ke-${i + 1}: ${error.message}`);
+        return;
+      }
+    }
+    payload.file = compressedFiles;
+    payload.action = "update,add";
+  }
+
+  let res = await api
+    .post("product/update", payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      console.log(res.data.result);
+      window.location.reload();
+    })
+    .catch((err) => toast.error(err.response.data));
+};
+
+export const deleteProductImg = async (
+  sellerid,
+  productid,
+  status,
+  old_file_id
+) => {
+  console.log(sellerid, productid, status, old_file_id);
+  toast.loading("Mohon Tunggu Sebentar");
+  let res = await api
+    .post(
+      "product/update",
+      {
+        seller_id: sellerid,
+        product_id: productid,
+        status: status,
+        action: "remove",
+        old_file_id: old_file_id,
+        server_id:
+          "qgivsx4lrp0b9zwo61umd2yf7kjn3atec8h5nlcsxhid2p81zoubwryt3v4amqe7g0956fjk",
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    )
+    .then((res) => {
+      console.log(res.data.result);
+      window.location.reload();
+    })
+    .catch((err) => toast.error(err.response.data));
+};
+
+export const removeProduct = async (sellerid, id, status) => {
+  console.log(sellerid, id, status);
+  toast.loading("Mohon Tunggu Sebentar");
+  let res = await api
+    .post("product/remove", {
+      seller_id: sellerid,
+      product_id: id,
+      status: status,
+    })
+    .then((res) => console.log(res.data.result))
+    .catch((err) => console.log(err.data.result));
+};
+
+export const updateProfile = async (accId, data, file) => {
+  console.log(accId, data, file);
+  toast.loading("Mohon Tunggu Sebentar");
+  const payload = {
+    id: accId,
+    data: data,
+    server_id:
+      "qgivsx4lrp0b9zwo61umd2yf7kjn3atec8h5nlcsxhid2p81zoubwryt3v4amqe7g0956fjk",
+  };
+
+  if (file && file.length > 0) {
+    const compressed = await imageCompression(file[0], {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    })
+      .then(function (compressedFile) {
+        console.log(
+          `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+        );
+        return compressedFile;
+      })
+      .catch(function (error) {
+        toast.error(error.message);
+      });
+
+    payload.action = "update";
+    payload.file = compressed;
+  }
+
+  api
+    .post("account/update", payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((res) => {
+      console.log(res.data.result);
+      window.location = "/account";
+    })
+    .catch((err) => toast.error("Ukuran foto terlalu besar"));
 };
 
 // Cart System
@@ -247,8 +423,15 @@ const initCart = () => {
     localStorage.setItem("cart", JSON.stringify([]));
   }
 };
+const initLike = () => {
+  const likes = localStorage.getItem("like");
+  if (likes === null) {
+    localStorage.setItem("like", JSON.stringify([]));
+  }
+};
 
 initCart();
+initLike();
 
 export const logout = () => {
   localStorage.clear();

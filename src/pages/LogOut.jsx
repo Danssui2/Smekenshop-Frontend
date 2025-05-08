@@ -6,7 +6,7 @@ function LogOut() {
   return (
     <>
       <Navbar />
-      <div className="bg-white py-6 sm:py-8 lg:py-12 w-screen h-screen flex items-center justify-center">
+      <div className="bg-white py-6 sm:py-8 lg:py-12 w-screen h-[90vh] flex items-center justify-center">
         <div className="mx-auto max-w-screen-lg px-4 md:px-8">
           <div className="">
             <div className="flex flex-col items-center justify-center sm:items-start md:py-24 lg:py-32">

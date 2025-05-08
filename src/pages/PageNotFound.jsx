@@ -32,7 +32,7 @@ function PageNotFound() {
               <nav className="flex gap-4 sm:block sm:space-y-1 md:space-y-2">
                 <div>
                   <a
-                    href="#"
+                    href="/"
                     className="inline-block text-sm text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 md:text-base">
                     Home
                   </a>
@@ -40,7 +40,7 @@ function PageNotFound() {
 
                 <div>
                   <a
-                    href="#"
+                    href="/#helpform"
                     className="inline-block text-sm text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700 md:text-base">
                     Help
                   </a>

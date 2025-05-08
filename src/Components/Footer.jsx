@@ -31,15 +31,15 @@ const Footer = () => {
     
             <nav className="flex flex-col gap-4">
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Highlighted</a>
+                <a href="#highlighted" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Highlighted</a>
               </div>
     
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Katalog</a>
+                <a href="#catalog" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Katalog</a>
               </div>
     
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Semua Produk</a>
+                <a href="#highlighted" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Semua Produk</a>
               </div>
     
             </nav>
@@ -50,11 +50,11 @@ const Footer = () => {
     
             <nav className="flex flex-col gap-4">
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Cara Penggunaan</a>
+                <a href="#helpform" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Cara Penggunaan</a>
               </div>
     
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Whatsapp Admin</a>
+                <a href="#helpform" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Whatsapp Admin</a>
               </div>
               
             </nav>
@@ -65,11 +65,11 @@ const Footer = () => {
     
             <nav className="flex flex-col gap-4">
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Mulai Menjual</a>
+                <a href="/account" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Mulai Menjual</a>
               </div>
     
               <div>
-                <a href="#" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Akun Saya</a>
+                <a href="/account" className="text-gray-500 transition duration-100 hover:text-indigo-500 active:text-indigo-600">Akun Saya</a>
               </div>
     
             </nav>

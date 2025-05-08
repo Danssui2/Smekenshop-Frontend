@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import seller from "../datas/seller.json";
 import Navbar from "../Components/Navbar.jsx";
-import Card from "../Components/Card.jsx";
-import { HiOutlineEye } from "react-icons/hi";
+import CardOwner from "../Components/CardOwner.jsx";
 import { TbBrandWechat } from "react-icons/tb";
-import { FiHeart } from "react-icons/fi";
 import { getUserInfo, getProductsBrief } from "../api.jsx";
 import { HashLoader } from "react-spinners";
+import { FaHeart } from "react-icons/fa6";
+import Loader from "../Components/Loader.jsx";
+import { Accordion } from "flowbite-react";
 
 function Account() {
   const [userData, setUserData] = useState();
   const [productList, setProductList] = useState([]);
-  const [listedCard, setlistedCard] = useState([]);
+  const [aprovedCard, setAprovedCard] = useState([]);
+  const [pendingCard, setPendingCard] = useState([]);
 
-  const token = JSON.parse(localStorage.getItem("userToken"))
+  const token = JSON.parse(localStorage.getItem("userToken"));
 
   const fetchUser = async () => {
     const response = await getUserInfo(token);
     setUserData(response);
-    console.log(response)
+    console.log(response);
     if (response.role === "admin") {
-      localStorage.setItem("XYZABC_SUPER", "SMEKENSA65")
-      window.location = "/administration";
+      localStorage.setItem("XYZABC_SUPER", "SMEKENSA65");
+      window.location = "/admin";
     }
   };
 
@@ -31,17 +31,37 @@ function Account() {
       const res = await getProductsBrief(userData?.id, userData?.products[i]);
       setProductList(productList.push(res));
       const lo = (
-        <Card
-          key={i}
-          img={res.images[0]}
-          name={res.product_name}
-          seller={userData?.name}
-          sellerId={userData?.id}
-          price={res.price}
-          id={res.product_id}
-        />
+        <div className="flex items-center flex-col" key={i}>
+          <CardOwner
+            key={i}
+            img={res?.images[0]?.link}
+            name={res.product_name}
+            seller={userData?.name}
+            sellerId={userData?.id}
+            price={res.price}
+            id={res.product_id}
+            status={res.status}
+          />
+          {res?.status == "approved" ? (
+            <span className="flex w-full h-10 font-semibold items-center justify-center bg-green-500 text-white">
+              Disetujui
+            </span>
+          ) : res?.status == "pending" ? (
+            <span className="flex w-full h-10 font-semibold items-center justify-center bg-yellow-300 text-white">
+              Dintinjau
+            </span>
+          ) : (
+            <span className="flex w-full h-10 font-semibold items-center justify-center bg-red-500 text-white">
+              Ditolak
+            </span>
+          )}
+        </div>
       );
-      setlistedCard((listedCard) => [...listedCard, lo]);
+      if (res.status == "approved") {
+        setAprovedCard((aprovedCard) => [...aprovedCard, lo]);
+      } else {
+        setPendingCard((pendingCard) => [...pendingCard, lo]);
+      }
     }
   };
 
@@ -64,13 +84,13 @@ function Account() {
       <Navbar />
 
       {userData ? (
-        <div className="bg-white w-screen px-[4%] py-6 pt-24 md:pt-32">
+        <div className="bg-white w-screen px-[4%] py-6 pt-24 md:pt-32 pb-[8rem] md:pb-0">
           <div className="mx-auto max-w-screen-xl px-4 md:px-8">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col md:flex-row gap-6 items-center">
                 <div className="h-32 w-32 overflow-hidden rounded-full border-4 border-indigo-500 bg-gray-200 shadow-lg">
                   <img
-                    src={userData?.profile}
+                    src={userData?.profile_photo}
                     loading="lazy"
                     alt="Profile"
                     className="h-full w-full object-cover object-center"
@@ -89,28 +109,24 @@ function Account() {
                       <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 p-4 text-white">
                         <TbBrandWechat />
                         <span className="text-sm">
-                          {userData?.interactions}
+                          {userData?.statistics?.total_interaction}
                         </span>
                         <span>interactions</span>
+                      </div>
+                      <div className="flex h-7 items-center gap-1 rounded-full bg-indigo-500 p-4 text-white">
+                        <FaHeart />
+                        <span className="text-sm">
+                          {userData?.statistics?.total_like}
+                        </span>
+                        <span>likes</span>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                {/* <a
-                  href={
-                    "https://wa.me/" +
-                    "+62881036490338" +
-                    "?text=" +
-                    "Hai, saya lihat profil anda dari smekenshop!"
-                  }
-                  className="inline-block flex-1 md:ml-20 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
-                  Chat Penjual
-                </a> */}
               </div>
               <div className="flex gap-4">
                 <a
-                  href="/post"
+                  href="/account/edit"
                   className="flex items-center rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
                   Edit Profil
                 </a>
@@ -125,16 +141,28 @@ function Account() {
                 className="inline-block flex-1 md:w-40 rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
                 Logout
               </a>
-              <div className="grid gap-x-4 gap-y-8 grid-cols-2 md:gap-x-6 lg:grid-cols-3 xl:grid-cols-6">
-                {listedCard}
+
+              <div className="flex flex-col md:mb-10 lg:flex-row lg:gap-6 gap-y-14 w-full">
+                <div className="w-full rounded-xl lg:w-[50%]">
+                  <h2 className="text-xl mb-4 font-semibold">Produk Lolos</h2>
+                  <div className="md:flex w-full flex-wrap grid grid-cols-2 gap-2 md:gap-4">
+                    {aprovedCard != [] ? aprovedCard : <p>Tidak Ada Produk</p>}
+                  </div>
+                </div>
+                <div className="w-full rounded-xl lg:w-[50%]">
+                  <h2 className="text-xl mb-4 font-semibold">
+                    Produk Dalam Peninjauan
+                  </h2>
+                  <div className="md:flex w-full flex-wrap grid grid-cols-2 gap-2 md:gap-4">
+                    {pendingCard != [] ? pendingCard : <p>Tidak Ada Produk</p>}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="w-screen h-screen flex items-center justify-center">
-          <HashLoader size={75} color="blue" />
-        </div>
+        <Loader fullscreen={true} />
       )}
     </>
   );

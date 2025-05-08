@@ -5,7 +5,12 @@ import { GoSearch } from "react-icons/go";
 import { Drawer } from "flowbite-react";
 import { useRef, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { IoCartOutline, IoHomeOutline, IoPersonOutline, IoSearch } from "react-icons/io5";
+import {
+  IoCartOutline,
+  IoHomeOutline,
+  IoPersonOutline,
+  IoSearch,
+} from "react-icons/io5";
 
 function Navbar() {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -132,20 +137,13 @@ function Navbar() {
               <span className="block text-xs pb-1">Home</span>
             </a>
           </div>
-          <div onClick={() => setIsOpenSearch(!isOpenSearch)} className="flex w-full justify-evenly items-center">
-            <span
-              className="flex items-center flex-col gap-1 justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500 border-b-2 border-transparent group-hover:border-indigo-500">
+          <div
+            onClick={() => setIsOpenSearch(!isOpenSearch)}
+            className="flex w-full justify-evenly items-center">
+            <span className="flex items-center flex-col gap-1 justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500 border-b-2 border-transparent group-hover:border-indigo-500">
               <IoSearch />
               <span className="block text-xs pb-1">Cari</span>
             </span>
-          </div>
-          <div className="flex w-full justify-evenly items-center">
-            <a
-              href="/account"
-              className="flex items-center flex-col gap-1 justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500 border-b-2 border-transparent group-hover:border-indigo-500">
-              <IoPersonOutline/>
-              <span className="block text-xs pb-1">Akun</span>
-            </a>
           </div>
           <div className="flex w-full justify-evenly items-center">
             <a
@@ -155,11 +153,21 @@ function Navbar() {
               <span className="block text-xs pb-1">Cart</span>
             </a>
           </div>
+          <div className="flex w-full justify-evenly items-center">
+            <a
+              href="/account"
+              className="flex items-center flex-col gap-1 justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-indigo-500 border-b-2 border-transparent group-hover:border-indigo-500">
+              <IoPersonOutline />
+              <span className="block text-xs pb-1">Akun</span>
+            </a>
+          </div>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <Drawer
         open={isOpenMenu}
+        className="bg-white/75 backdrop-blur supports-[backdrop-filter]:bg-background/60"
         onClose={() => setIsOpenMenu(false)}
         position="right">
         <div className="pt-10 md:pt-20">
@@ -207,7 +215,7 @@ function Navbar() {
                   name="search"
                   id="search2"
                   placeholder="Cari Barang..."
-                  className="lg:hidden rounded-xl w-full p-2 ps-10"
+                  className="lg:hidden rounded-xl w-80 p-2 ps-10"
                 />
               </form>
             </div>
