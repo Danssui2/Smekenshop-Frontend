@@ -454,7 +454,7 @@ export const Accounts = () => {
           <h3 className="text-md font-semibold">
             instance: {accInfo?.instance}
           </h3>
-          <h4>Whatsapp: +{accInfo?.whatsapp}</h4>
+          <p>Whatsapp: {String(accInfo?.whatsapp).includes('+') ? accInfo?.whatsapp : `+${accInfo?.whatsapp}`}</p>
           <p>Status: {accInfo?.role}</p>
           <p>Interaction: {accInfo?.interaction}</p>
           <p>Email: {accInfo?.email}</p>

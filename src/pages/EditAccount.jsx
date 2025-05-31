@@ -164,6 +164,7 @@ function EditAccount() {
                     type="text"
                     defaultValue={userData?.whatsapp}
                     required
+                    pattern="^\+[1-9]{1}[0-9]{3,14}$"
                     title="Harus Menggunakan Format +62xxxxxxxxx"
                     name="Whatsapp"
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
