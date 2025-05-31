@@ -60,6 +60,8 @@ function Products() {
             like={data?.like}
             id={data?.product_id}
             stock={data?.stock}
+            status={data?.status}
+            owner_role={sellerData?.role}
           />
         )}
       </div>

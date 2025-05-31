@@ -7,17 +7,17 @@ export default function Marquee() {
       <motion.div
         className="flex whitespace-nowrap"
         animate={{ x: ["0%", "-380%"] }}
-        transition={{ repeat: Number.POSITIVE_INFINITY, ease: "linear", duration: 15 }}
+        transition={{ repeat: Number.POSITIVE_INFINITY, ease: "linear", duration: 7 }}
       >
         {[...Array(4)].map((_, index) => (
-          <div key={index} className="flex items-center mx-4">
+          <div key={index} className="flex items-center mx-8">
             <span
               className="text-7xl sm:text-8xl md:text-9xl font-bold text-transparent px-4"
               style={{
                 WebkitTextStroke: "1px oklch(58.5% 0.233 277.117)", // tailwind gray-400
               }}
             >
-              Smekensa & Smekenshop
+              Place Your Ads Here
             </span>
           </div>
         ))}

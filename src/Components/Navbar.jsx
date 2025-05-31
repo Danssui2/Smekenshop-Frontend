@@ -176,22 +176,22 @@ function Navbar() {
             <nav className="flex flex-col gap-5">
               <a
                 href="/#home"
-                className="text-3xl font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
+                className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
                 Home
               </a>
               <a
                 href="/#highlighted"
-                className="text-3xl font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
+                className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
                 Highlight
               </a>
               <a
                 href="/#catalog"
-                className="text-3xl font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
+                className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
                 Katalog
               </a>
               <a
                 href="/#footer"
-                className="text-3xl font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
+                className="text-lg font-semibold text-gray-600 transition duration-100 hover:text-indigo-500 active:text-indigo-700">
                 Tentang
               </a>
             </nav>

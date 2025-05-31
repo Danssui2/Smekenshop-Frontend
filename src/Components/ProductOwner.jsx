@@ -174,9 +174,13 @@ function ProductOwner({
                   <div className="flex w-full h-20 font-semibold text-2xl items-center justify-center bg-yellow-300 text-white">
                     Sedang Dintinjau
                   </div>
-                ) : (
+                ) : status == 'rejected' ? (
                   <div className="flex w-full h-20 font-semibold text-2xl items-center justify-center bg-red-500 text-white">
                     Ditolak
+                  </div>
+                ) : (
+                  <div className="flex w-full h-20 font-semibold text-2xl items-center justify-center bg-red-500 text-white">
+                    Didrop
                   </div>
                 )}
               </div>

@@ -14,7 +14,7 @@ import Register from "./pages/Register.jsx";
 import Account from "./pages/Account.jsx";
 import LogOut from "./pages/LogOut.jsx";
 import Cart from "./pages/Cart.jsx";
-import { AdminDashboard, ReviewProduct } from "./pages/Admin.jsx";
+import { AdminDashboard, ReviewAccount, ReviewProduct, Accounts } from "./pages/Admin.jsx";
 import EditAccount from "./pages/EditAccount.jsx";
 import ProductEdit from "./pages/ProductEdit.jsx";
 
@@ -48,6 +48,8 @@ createRoot(document.getElementById("root")).render(
       <Route element={<AdminRoutes/>}>
         <Route path="/admin/" element={<AdminDashboard />} />
         <Route path="/admin/review/:seller/:id" element={<ReviewProduct />} />
+        <Route path="/admin/review-account" element={<ReviewAccount />} />
+        <Route path="/admin/account/:id" element={<Accounts />} />
       </Route>
       <Route path="*" element={<PageNotFound />} />
     </Routes>

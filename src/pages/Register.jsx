@@ -9,6 +9,9 @@ function Register() {
   const [password, setPassword] = React.useState("");
   const [instance, setInstance] = React.useState("Siswa");
   const [whatsapp, setWhatsapp] = React.useState("");
+  const [asalSekolah, setAsalSekolah] = React.useState("");
+  const [jurusan, setJurusan] = React.useState("TKP");
+  const [files, setFiles] = React.useState([]);
 
   const signupHanlder = () => {
     if (
@@ -16,11 +19,14 @@ function Register() {
       password === "" ||
       name === "" ||
       instance === "" ||
-      whatsapp === ""
+      whatsapp === "" ||
+      asalSekolah === "" ||
+      jurusan === "" ||
+      files.length == 0
     ) {
-      toast.error("Tidak Boleh Kosong!");
+      toast.error("Semua data harus diisi!");
     } else {
-      signup(name, email, password, instance, whatsapp);
+      signup(name, email, password, instance, whatsapp, asalSekolah, jurusan, files);
     }
   };
 
@@ -36,7 +42,7 @@ function Register() {
 
           <div className="mx-auto max-w-lg rounded-lg border">
             <form
-              onSubmit={(e) => {e.preventDefault(); signupHanlder()}}
+              onSubmit={(e) => { e.preventDefault(); signupHanlder() }}
               action=""
               className="flex flex-col gap-4 p-4 md:p-8">
               <div>
@@ -89,7 +95,7 @@ function Register() {
               <div className="flex w-full justify-between items-center">
                 <label
                   htmlFor="instance"
-                  className="mb-2 inline-block text-sm text-gray-800 sm:text-base">
+                  className="sm:mb-2 inline-block text-sm text-gray-800 sm:text-base">
                   Instansi
                 </label>
                 <select
@@ -120,10 +126,61 @@ function Register() {
                 />
               </div>
 
+              <div>
+                <label
+                  htmlFor="asalsekolah"
+                  className="mb-2 inline-block text-sm text-gray-800 sm:text-base">
+                  Asal Sekolah
+                </label>
+                <input
+                  onChange={(e) => setAsalSekolah(e.target.value)}
+                  type="text"
+                  required
+                  name="Asal Sekolah"
+                  className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
+                />
+              </div>
+
+              <div className="flex w-full justify-between items-center">
+                <label
+                  htmlFor="jurusan"
+                  className="sm:mb-2 inline-block text-sm text-gray-800 sm:text-base">
+                  Jurusan
+                </label>
+                <select
+                  onChange={(e) => setJurusan(e.target.value)}
+                  name="jurusan"
+                  id="jurusan">
+                  <option value="TKP">TKP</option>
+                  <option value="DPIB">DPIB</option>
+                  <option value="TPM">TPM</option>
+                  <option value="TKRO">TKRO</option>
+                  <option value="TEI">TEI</option>
+                  <option value="TAV">TAV</option>
+                  <option value="TITL">TITL</option>
+                  <option value="TJKT">TJKT</option>
+                  <option value="PSPR">PSPR</option>
+                  <option value="PSPTV">PSPTV</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col w-full gap-2">
+                <label className="mt-3 mb-2 inline-block text-sm text-gray-800 sm:text-base">
+                  Upload Foto Profil
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setFiles(e.target.files)}
+                  name="imgup"
+                  id="imgup"
+                />
+              </div>
+
               <input
                 type="submit"
                 value={"Daftar"}
-                className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base"
+                className="mt-5 block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base"
               />
             </form>
             <div className="flex items-center justify-center bg-gray-100 p-4">

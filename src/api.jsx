@@ -50,17 +50,47 @@ export const signin = async (email, password) => {
     });
 };
 
-export const signup = async (name, email, password, instance, whatsapp) => {
+export const signup = async (name, email, password, instance, whatsapp, asalSekolah, jurusan, file) => {
   console.log(name, email, password, instance, whatsapp);
   let loads = toast.loading("Mohon Tunggu Sebentar");
 
-  await api
-    .post("/auth/signup", {
-      email: email,
-      password: password,
-      name: name,
-      instance: instance,
-      whatsapp: whatsapp,
+  const payload = {
+    name,
+    email,
+    password,
+    instance,
+    whatsapp,
+    asal_sekolah: asalSekolah,
+    jurusan,
+    server_id:
+      "qgivsx4lrp0b9zwo61umd2yf7kjn3atec8h5nlcsxhid2p81zoubwryt3v4amqe7g0956fjk",
+  };
+
+  if (file && file.length > 0) {
+    const compressed = await imageCompression(file[0], {
+      maxSizeMB: 0.2,
+      maxWidthOrHeight: 1920,
+      useWebWorker: true,
+    })
+      .then(function (compressedFile) {
+        console.log(
+          `compressedFile size ${compressedFile.size / 1024 / 1024} MB`
+        );
+        return compressedFile;
+      })
+      .catch(function (error) {
+        toast.error(error.message);
+      });
+
+    payload.action = "update";
+    payload.file = compressed;
+  }
+
+  api
+    .post("auth/signup", payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     })
     .then((res) => {
       console.log(res.data);
@@ -88,21 +118,6 @@ export const signup = async (name, email, password, instance, whatsapp) => {
     });
 };
 
-export const getUserInfo = async (token) => {
-  const info = await api
-    .post("/verify/token", {
-      access_token: token,
-    })
-    .then((res) => {
-      localStorage.setItem("seller_id", res.data.result.id);
-      return res.data.result;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  return info;
-};
-
 export const getSellerInfo = async (acc) => {
   const info = await api
     .post("/verify/account", {
@@ -117,6 +132,7 @@ export const getSellerInfo = async (acc) => {
     });
   return info;
 };
+
 
 export const uploadProduct = async (
   file,
@@ -271,6 +287,42 @@ export const aproveRejectPost = async (id, action, status, msg) => {
   return res;
 };
 
+export const dropPost = async (id, action, status, msg) => {
+  console.log(status);
+  toast.loading("Mohon Tunggu Sebentar");
+  let res = await api
+    .post("/product/review", {
+      status: "approved",
+      product_id: id,
+      action: action,
+      message: msg,
+    })
+    .then((res) => {
+      console.log(res.data.result);
+      window.location = "/admin";
+      return res.data.result;
+    })
+    .catch((err) => toast.error(err.response.data));
+  return res;
+};
+
+export const undropPost = async (id, action) => {
+  toast.loading("Mohon Tunggu Sebentar");
+  let res = await api
+    .post("/product/review", {
+      status: "dropped",
+      product_id: id,
+      action: action,
+    })
+    .then((res) => {
+      console.log(res.data.result);
+      window.location = "/admin";
+      return res.data.result;
+    })
+    .catch((err) => toast.error(err.response.data));
+  return res;
+};
+
 export const updateProduct = async (
   sellerid,
   productid,
@@ -415,6 +467,51 @@ export const updateProfile = async (accId, data, file) => {
     })
     .catch((err) => toast.error("Ukuran foto terlalu besar"));
 };
+
+export const getUserInfo = async (token) => {
+  const info = await api
+    .post("/verify/token", {
+      access_token: token,
+    })
+    .then((res) => {
+      localStorage.setItem("seller_id", res.data.result.id);
+      return res.data.result;
+    })
+    .catch((err) => {
+      window.location = '/login'
+      console.log(err);
+    });
+  return info;
+};
+
+export const getUserList = async (role) => {
+  const info = await api
+    .post("/account/list", {
+      role
+    })
+    .then((res) => {
+      return res.data.result;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  return info;
+}
+
+export const banUser = async (id, role, message = '-') => {
+  toast.loading('Mohon tunggu sebentar...')
+  await api.post('/account/role', {
+    id,
+    role,
+    message
+  })
+  .then((res) => {
+    window.location = '/admin/review-account'
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
 
 // Cart System
 const initCart = () => {

@@ -19,7 +19,6 @@ function Account() {
   const fetchUser = async () => {
     const response = await getUserInfo(token);
     setUserData(response);
-    console.log(response);
     if (response.role === "admin") {
       localStorage.setItem("XYZABC_SUPER", "SMEKENSA65");
       window.location = "/admin";
@@ -48,13 +47,18 @@ function Account() {
             </span>
           ) : res?.status == "pending" ? (
             <span className="flex w-full h-10 font-semibold items-center justify-center bg-yellow-300 text-white">
-              Dintinjau
+              Ditinjau
             </span>
-          ) : (
+          ) : res?.status == "rejected" ? (
             <span className="flex w-full h-10 font-semibold items-center justify-center bg-red-500 text-white">
               Ditolak
             </span>
-          )}
+          ) : res?.status == "dropped" ? (
+            <span className="flex w-full h-10 font-semibold items-center justify-center bg-red-500 text-white">
+              Didrop
+            </span>
+          ) : null}
+
         </div>
       );
       if (res.status == "approved") {
@@ -99,7 +103,7 @@ function Account() {
                 <div>
                   <div className="flex flex-col items-center md:items-start">
                     <p className="mb-1 text-sm font-semibold uppercase text-indigo-500 md:text-base">
-                      {userData?.instance}
+                      {userData?.instance} {userData?.asal_sekolah} - {userData?.jurusan == '-' ? '' : userData?.jurusan}
                     </p>
                     <h1 className="mb-2 text-center text-4xl font-bold text-gray-800 sm:text-left md:text-4xl">
                       {userData?.name}
@@ -124,40 +128,55 @@ function Account() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-4">
-                <a
-                  href="/account/edit"
-                  className="flex items-center rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
-                  Edit Profil
-                </a>
-                <a
-                  href="/post"
-                  className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
-                  Jual Produk Baru
-                </a>
-              </div>
+              {userData?.role != 'banned' && (
+                <div className="flex gap-4">
+                  <a
+                    href="/account/edit"
+                    className="flex items-center rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+                    Edit Profil
+                  </a>
+                  <a
+                    href="/post"
+                    className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
+                    Jual Produk Baru
+                  </a>
+                </div>
+              )}
               <a
                 href="/logout"
                 className="inline-block flex-1 md:w-40 rounded-lg bg-red-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base">
                 Logout
               </a>
 
-              <div className="flex flex-col md:mb-10 lg:flex-row lg:gap-6 gap-y-14 w-full">
-                <div className="w-full rounded-xl lg:w-[50%]">
-                  <h2 className="text-xl mb-4 font-semibold">Produk Lolos</h2>
-                  <div className="md:flex w-full flex-wrap grid grid-cols-2 gap-2 md:gap-4">
-                    {aprovedCard != [] ? aprovedCard : <p>Tidak Ada Produk</p>}
+              {
+                userData?.role != 'banned' ? (
+                  <div className="flex flex-col md:mb-10 lg:flex-row lg:gap-6 gap-y-14 w-full">
+                    <div className="w-full rounded-xl lg:w-[50%]">
+                      <h2 className="text-xl mb-4 font-semibold">Produk Lolos</h2>
+                      <div className="md:flex w-full flex-wrap grid grid-cols-2 gap-2 md:gap-4">
+                        {aprovedCard != [] ? aprovedCard : <p>Tidak Ada Produk</p>}
+                      </div>
+                    </div>
+                    <div className="w-full rounded-xl lg:w-[50%]">
+                      <h2 className="text-xl mb-4 font-semibold">
+                        Produk Dalam Peninjauan/banned
+                      </h2>
+                      <div className="md:flex w-full flex-wrap grid grid-cols-2 gap-2 md:gap-4">
+                        {pendingCard != [] ? pendingCard : <p>Tidak Ada Produk</p>}
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className="w-full rounded-xl lg:w-[50%]">
-                  <h2 className="text-xl mb-4 font-semibold">
-                    Produk Dalam Peninjauan
-                  </h2>
-                  <div className="md:flex w-full flex-wrap grid grid-cols-2 gap-2 md:gap-4">
-                    {pendingCard != [] ? pendingCard : <p>Tidak Ada Produk</p>}
-                  </div>
-                </div>
-              </div>
+                ) : (
+                  <>
+                    <h2 className="text-xl font-semibold mb-[-20px]">
+                      Akun Anda telah diblokir. Alasan: {userData?.message}
+                    </h2>
+                    <p>
+                      Akun yang diblokir tidak akan dapat diedit dan semua produk tidak akan dapat diakses.
+                    </p>
+                  </>
+                )
+              }
             </div>
           </div>
         </div>

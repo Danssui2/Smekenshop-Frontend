@@ -13,17 +13,19 @@ function EditAccount() {
   const [instance, setInstance] = React.useState(userData?.instance);
   const [whatsapp, setWhatsapp] = React.useState(userData?.whatsapp);
   const [files, setFiles] = React.useState([]);
+  const [asalSekolah, setAsalSekolah] = React.useState("");
+  const [jurusan, setJurusan] = React.useState("TKP")
 
   const idAcc = String(localStorage.getItem("seller_id"));
 
   const updateHandler = async () => {
-    if (name === "" || instance === "" || whatsapp === "") {
+    if (name === "" || instance === "" || whatsapp === "" || asalSekolah === "" || jurusan === "") {
       toast.error("Tidak Boleh Kosong!");
     } else {
       await updateProfile(
         idAcc,
-        JSON.stringify({ name, instance, whatsapp }),
-        files,
+        JSON.stringify({ name, instance, whatsapp, asal_sekolah: asalSekolah, jurusan }),
+        files
       );
     }
   };
@@ -54,6 +56,8 @@ function EditAccount() {
     setInstance(userData?.instance);
     setPassword(userData?.password);
     setWhatsapp(userData?.whatsapp);
+    setJurusan(userData?.jurusan);
+    setAsalSekolah(userData?.asal_sekolah)
   }, [userData]);
 
   return (
@@ -115,7 +119,7 @@ function EditAccount() {
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                   />
                 </div>
-{/* 
+                {/* 
                 <div>
                   <label
                     htmlFor="password"
@@ -160,17 +164,56 @@ function EditAccount() {
                     type="text"
                     defaultValue={userData?.whatsapp}
                     required
-                    pattern="^\+[1-9]{1}[0-9]{3,14}$"
                     title="Harus Menggunakan Format +62xxxxxxxxx"
                     name="Whatsapp"
                     className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
                   />
                 </div>
 
+                <div>
+                  <label
+                    htmlFor="asalsekolah"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base">
+                    Asal Sekolah
+                  </label>
+                  <input
+                    onChange={(e) => setAsalSekolah(e.target.value)}
+                    type="text"
+                    required
+                    name="Asal Sekolah"
+                    defaultValue={userData?.asal_sekolah == '-' ? '' : userData?.asal_sekolah}
+                    className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
+                  />
+                </div>
+
+                <div className="flex w-full justify-between items-center">
+                  <label
+                    htmlFor="jurusan"
+                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base">
+                    Jurusan
+                  </label>
+                  <select
+                    onChange={(e) => setJurusan(e.target.value)}
+                    value={jurusan}
+                    name="jurusan"
+                    id="jurusan">
+                    <option value="TKP">TKP</option>
+                    <option value="DPIB">DPIB</option>
+                    <option value="TPM">TPM</option>
+                    <option value="TKRO">TKRO</option>
+                    <option value="TEI">TEI</option>
+                    <option value="TAV">TAV</option>
+                    <option value="TITL">TITL</option>
+                    <option value="TJKT">TJKT</option>
+                    <option value="PSPR">PSPR</option>
+                    <option value="PSPTV">PSPTV</option>
+                  </select>
+                </div>
+
                 <input
                   type="submit"
                   value={"Perbarui Profil"}
-                  className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base"
+                  className="mt-5 block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base"
                 />
               </form>
             </div>

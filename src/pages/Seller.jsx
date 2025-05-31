@@ -74,7 +74,7 @@ function Seller() {
                 <div>
                   <div className="flex flex-col items-center md:items-start">
                     <p className="mb-1 text-sm font-semibold uppercase text-indigo-500 md:text-base">
-                      {userData?.instance}
+                      {userData?.instance} {userData?.asal_sekolah} {userData?.jurusan == '-' ? '' : `- ${userData?.jurusan}`}
                     </p>
                     <h1 className="mb-2 text-center text-4xl font-bold text-gray-800 sm:text-left md:text-4xl">
                       {userData?.name}
