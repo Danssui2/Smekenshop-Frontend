@@ -7,7 +7,7 @@ export default function Marquee() {
       <motion.div
         className="flex whitespace-nowrap"
         animate={{ x: ["0%", "-380%"] }}
-        transition={{ repeat: Number.POSITIVE_INFINITY, ease: "linear", duration: 7 }}
+        transition={{ repeat: Number.POSITIVE_INFINITY, ease: "linear", duration: 17 }}
       >
         {[...Array(4)].map((_, index) => (
           <div key={index} className="flex items-center mx-8">
