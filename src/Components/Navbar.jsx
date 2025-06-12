@@ -33,7 +33,7 @@ function Navbar() {
             className="inline-flex items-center gap-2.5 text-xl font-bold text-black md:text-2xl lg:text-3xl"
             aria-label="logo">
             <img src={logoStm} className="w-9 md:w-16" />
-            Smekenshop
+            Ponpin
           </a>
           <nav className="hidden gap-8 xl:flex 2xl:ml-16">
             <a

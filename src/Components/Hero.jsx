@@ -17,7 +17,7 @@ const Hero = () => {
       <section className="mx-auto mt-[25%] lg:mt-[8%] max-w-screen-2xl px-4 md:px-8">
         <div className="mb-10 flex flex-wrap justify-between md:mb-16">
           <div className="mb-12 flex w-full flex-col justify-center md:items-start sm:mb-12 lg:mb-0 lg:w-1/3 lg:pb-24 lg:pt-32">
-            <p className="text-left mb-1">Smekenshop.</p>
+            <p className="text-left mb-1">Ponpin.</p>
             <h1 className="mb-4 text-[40px] leading-none font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-800 via-black/50 to-indigo-400 text-left md:mb-8 md:text-5xl">
               Marketplace For
               <br />

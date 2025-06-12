@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="mb-4 lg:-mt-2">
               <a href="/" className="inline-flex items-center gap-2 text-xl font-bold text-black md:text-2xl" aria-label="logo">
                 <img src={logoStm} className="w-12 lg:w-16" />
-                Smekenshop
+                Ponpin
               </a>
             </div>
 
@@ -22,7 +22,7 @@ const Footer = () => {
               terstruktur ini memudahkan siswa, guru, dan karyawan SMKN 1 Blitar untuk
               menemukan kebutuhan mereka. Kami memanfaatkan teknologi bot dan
               algoritma cerdas untuk pencarian yang cepat dan rekomendasi personal.
-              Smekenshop bertekad menciptakan ekosistem belanja daring yang aman,
+              Ponpin bertekad menciptakan ekosistem belanja daring yang aman,
               personal, dan edukatif bagi warga SMKN 1 Blitar dan sekitarnya.</p>
 
             <div className="flex gap-4">
@@ -83,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t py-8 text-center text-sm text-gray-400">© 2025 Smekenshop by Marga Bakti Teknologi. All rights reserved.</div>
+        <div className="border-t py-8 text-center text-sm text-gray-400">© 2025 Ponpin by Marga Bakti Teknologi. All rights reserved.</div>
       </footer>
     </div>
   )
