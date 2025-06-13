@@ -1,5 +1,5 @@
 import React from 'react'
-import logoStm from '../assets/logostm.png'
+import logo from '../assets/logo.png'
 import { BsWhatsapp } from "react-icons/bs"
 
 const Footer = () => {
@@ -11,7 +11,7 @@ const Footer = () => {
 
             <div className="mb-4 lg:-mt-2">
               <a href="/" className="inline-flex items-center gap-2 text-xl font-bold text-black md:text-2xl" aria-label="logo">
-                <img src={logoStm} className="w-12 lg:w-16" />
+                <img src={logo} className="w-12 lg:w-16" />
                 Ponpin
               </a>
             </div>
