@@ -290,7 +290,7 @@ export function ReviewProduct() {
               <Button onClick={() => handleUndrop("approve")}>Undrop</Button>
             ) : (
               <>
-                {(data?.status == 'pendings' || data?.status == 'rejected') && (
+                {(data?.status == 'pending' || data?.status == 'rejected') && (
                   <>
                     <Button onClick={() => handleACC("approve")}>Approve</Button>
                     {data?.status == 'pendings' && (
