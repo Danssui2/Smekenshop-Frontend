@@ -293,7 +293,7 @@ export function ReviewProduct() {
                 {(data?.status == 'pending' || data?.status == 'rejected') && (
                   <>
                     <Button onClick={() => handleACC("approve")}>Approve</Button>
-                    {data?.status == 'pendings' && (
+                    {data?.status == 'pending' && (
                       <Button color="red" onClick={() => handleACC("reject")}>
                         Reject
                       </Button>
